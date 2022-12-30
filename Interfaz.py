@@ -321,7 +321,7 @@ class Metodos:
         btn_limpiar.config(bg="#ffffff", fg="black")
         lbl_img1.config(bg="#ffffff",image=img5)
         lbl_img2.config(bg="#ffffff",image=img6)
-        lbl_img3.config(bg="#ffffff",image=img7)
+        #lbl_img3.config(bg="#ffffff",image=img7)
         #lbl_img4.config(bg="#ffffff",image=img8)
         #txt_intervaloA.config(font=("Bahnschrift", 12), bg="#000000", fg="white")
         #txt_intervaloB.config(font=("Bahnschrift", 12), bg="#000000", fg="white")
