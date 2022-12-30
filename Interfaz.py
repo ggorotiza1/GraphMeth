@@ -327,9 +327,6 @@ class Metodos:
         #txt_intervaloB.config(font=("Bahnschrift", 12), bg="#000000", fg="white")
         #txt_rango.config(font=("Bahnschrift", 14), bg="#000000", fg="white")
 
-
-
-
     def accionesARealizar():
         if cmb_metodos.current() == -1:
             messagebox.showinfo("Atención",
@@ -343,7 +340,6 @@ class Metodos:
         elif cmb_metodos.current() == 2:
             #Metodos.métodoDeNewtonRaphson()
             Metodos.abrirPDF()
-
 
 if __name__ == "__main__":
     root = Tk()
@@ -364,7 +360,6 @@ if __name__ == "__main__":
     img6 = PhotoImage(file="grafica1.png")
     img7 = PhotoImage(file="limpiar1.png")
     img8 = PhotoImage(file="info1.png")
-
 
     # Labels Creados
     lbl_titulo = Label(frame, text="Métodos Numéricos")
