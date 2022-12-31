@@ -48,36 +48,38 @@ class Metodos:
         #self.wind.resizable(0, 0)
         self.wind.iconbitmap("Icono_GraphMeth.ico")
 
-    def xd(self,frame):
-        frame2.place(x=100, y=0)
+    def frameTitulo(self, frame, label):
+        frame.place(x=0, y=0)
         #label.config(bg="#383838", fg="white", font=("Bahnschrift", 24))
-        lbl_titulo.place(x=500, y=10)
+        label.place(x=500, y=10)
 
-        frame2.place(x=0, y=70)
+    def frameOpciones(self, frame, radio1, radio2, combo):
+        frame.place(x=0, y=70)
         # radio1.place(x=0, y=2)
         # radio1.config(bg="#424141")
         # radio2.place(x=200, y=2)
         # radio2.config(bg="#424141")
-        cmb_metodos.place(x=190, y=5)
+        combo.place(x=190, y=5)
         textoCombo = customtkinter.CTkLabel(frame, text="Seleccione un Método: ")
         textoCombo.place(x=10, y=1)
 
-        frame1.place(x=0, y=100)
-        lbl_formula.place(x=335, y=25)
+    def frameFormula(self, frame, titulo, intervaloA, intervaloB, entry1, entry2, entry3, boton1, boton2, boton3, l1, t1):
+        frame.place(x=0, y=100)
+        titulo.place(x=335, y=25)
         #titulo.config(font=("Bahnschrift", 18), bg="#5c5c5c", fg="white")
-        lbl_intervaloA.place(x=260, y=165)
+        intervaloA.place(x=260, y=165)
         #intervaloA.config(font=("Bahnschrift", 12), bg="#5c5c5c", fg="white")
-        lbl_intervaloB.place(x=440, y=165)
+        intervaloB.place(x=440, y=165)
         #intervaloB.config(font=("Bahnschrift", 12), bg="#5c5c5c", fg="white")
-        txt_formula.place(x=333, y=65)
-        txt_intervaloA.place(x=280, y=195)
-        txt_intervaloB.place(x=460, y=195)
-        btn_calcular.place(x=80, y=50)
-        btn_graficar.place(x=80, y=110)
-        btn_limpiar.place(x=80, y=170)
-        lbl_rango.place(x=390, y=95)
+        entry1.place(x=333, y=65)
+        entry2.place(x=280, y=195)
+        entry3.place(x=460, y=195)
+        boton1.place(x=80, y=50)
+        boton2.place(x=80, y=110)
+        boton3.place(x=80, y=170)
+        l1.place(x=390, y=95)
         #l1.config(font=("Bahnschrift", 14), bg="#5c5c5c", fg="white")
-        txt_rango.place(x=333, y=125)
+        t1.place(x=333, y=125)
         #lbl_img1.place(x=30, y=50)
         #lbl_img1.config(bg="#5c5c5c")
         #lbl_img2.place(x=30, y=110)
@@ -402,9 +404,16 @@ if __name__ == "__main__":
     
     # Inicialización de la Clase
     Metodos = Metodos(root)
-    Metodos.xd(root)
-    # Uso de Recursos
 
+    # Uso de Recursos
+    Metodos.frameTitulo(frame, lbl_titulo)
+    Metodos.frameFormula(frame1, lbl_formula, lbl_intervaloA, lbl_intervaloB, txt_formula,
+                         txt_intervaloA, txt_intervaloB, btn_calcular, btn_graficar,
+                         btn_limpiar, lbl_rango, txt_rango)
+    Metodos.frameOpciones(frame2, rbt_biseccion,
+                          rbt_falsaposicion, cmb_metodos)
+    Metodos.frameTabla(frame3, lbl_table, trv)
+    Metodos.frameGrafica(frame4, lbl_grafica)
     # Metodos.dibujarEjes(cvs, frame4)
 
 root.mainloop()
