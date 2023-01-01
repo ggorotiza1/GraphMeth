@@ -17,6 +17,7 @@ from sympy import sympify
 from idlelib.tooltip import Hovertip
 import sympy as sp
 import os
+from PIL import Image
 import customtkinter
 # from scipy.misc import derivative
 
@@ -253,14 +254,29 @@ if __name__ == "__main__":
     frame2.place(x=640, y=100)
 
     # Imagenes
-    img1 = PhotoImage(file="calculadora.png")
-    img2 = PhotoImage(file="grafica.png")
-    img3 = PhotoImage(file="limpiar.png")
-    img4 = PhotoImage(file="info.png")
-    img5 = PhotoImage(file="calculadora1.png")
-    img6 = PhotoImage(file="grafica1.png")
-    img7 = PhotoImage(file="limpiar1.png")
-    img8 = PhotoImage(file="info1.png")
+    img1 = customtkinter.CTkImage(light_image=Image.open("calculadora1.png"),
+                                  dark_image=Image.open("calculadora.png"),
+                                  size=(36, 36))
+    img2 = customtkinter.CTkImage(light_image=Image.open("grafica1.png"),
+                                  dark_image=Image.open("grafica.png"),
+                                  size=(36, 36))
+    img3 = customtkinter.CTkImage(light_image=Image.open("limpiar1.png"),
+                                  dark_image=Image.open("limpiar.png"),
+                                  size=(36, 36))
+    img4 = customtkinter.CTkImage(light_image=Image.open("info1.png"),
+                                  dark_image=Image.open("info.png"),
+                                  size=(24, 24))
+
+    lbl_img1 = customtkinter.CTkLabel(frame, image=img1, text="")
+    lbl_img1.place(x=30, y=163)
+    lbl_img2 = customtkinter.CTkLabel(frame, image=img2, text="")
+    lbl_img2.place(x=30, y=223)
+    lbl_img3 = customtkinter.CTkLabel(frame, image=img3, text="")
+    lbl_img3.place(x=30, y=283)
+    lbl_img4 = customtkinter.CTkLabel(frame, image=img4, text="")
+    lbl_img4.place(x=540, y=210)
+    Hovertip(lbl_img4, text="¿Qué valor ingresar?\nRepresentará el eje de las Abscisas.\nPor ejemplo: -20,20", hover_delay=500)
+
 
     # Labels Creados
     lbl_titulo = customtkinter.CTkLabel(master = frame, text="Métodos Numéricos", font=("Roboto",25))
@@ -287,11 +303,11 @@ if __name__ == "__main__":
 #    txt_rango.insert(0,"-20,20")
 
     # Entrys Creados
-    txt_formula = customtkinter.CTkEntry(master =frame, font=("Roboto", 15), width=180, justify="center", placeholder_text="Ej: sin(x)")
+    txt_formula = customtkinter.CTkEntry(master =frame, font=("Roboto", 15), width=180, justify="center", placeholder_text="Ej: sin(x)", border_width=2)
     txt_formula.place(x=340, y=170)
-    txt_intervaloA = customtkinter.CTkEntry(master =frame, font=("Roboto", 15), width=140, justify="center", placeholder_text="Ej: -1 o 0")
+    txt_intervaloA = customtkinter.CTkEntry(master =frame, font=("Roboto", 15), width=140, justify="center", placeholder_text="Ej: -1 o 0", border_width=2)
     txt_intervaloA.place(x=280, y=320)
-    txt_intervaloB = customtkinter.CTkEntry(master =frame, font=("Roboto", 15), width=140, justify="center", placeholder_text="Ej: 0 o 1")
+    txt_intervaloB = customtkinter.CTkEntry(master =frame, font=("Roboto", 15), width=140, justify="center", placeholder_text="Ej: 0 o 1", border_width=2)
     txt_intervaloB.place(x=450, y=320)
     textoAutores = customtkinter.CTkLabel(master=frame, text="Desarrollado por: Gorotiza - García - Masache", font=("Roboto", 16))
     textoAutores.place(x=155, y=660)
@@ -331,11 +347,11 @@ if __name__ == "__main__":
     trv.place(x=20, y=410, width=600)
 
     # Buttons Creados
-    btn_calcular = customtkinter.CTkButton(master=frame, text="Calcular", width=150, height=40, font=("Roboto", 16), command=Metodos.accionesARealizar)
+    btn_calcular = customtkinter.CTkButton(master=frame, text="Calcular", width=150, height=40, font=("Roboto", 16), command=Metodos.accionesARealizar, border_width=2)
     btn_calcular.place(x=80, y=160)
-    btn_graficar = customtkinter.CTkButton(master=frame, text="Graficar", width=150, height=40, font=("Roboto", 16), command=Metodos.represent)
+    btn_graficar = customtkinter.CTkButton(master=frame, text="Graficar", width=150, height=40, font=("Roboto", 16), command=Metodos.represent, border_width=2)
     btn_graficar.place(x=80, y=220)
-    btn_limpiar = customtkinter.CTkButton(master=frame, text="Nuevo", width=150, height=40, font=("Roboto", 16), command=Metodos.limpiar)
+    btn_limpiar = customtkinter.CTkButton(master=frame, text="Nuevo", width=150, height=40, font=("Roboto", 16), command=Metodos.limpiar, border_width=2)
     btn_limpiar.place(x=80, y=280)
 
     cmb_modo = customtkinter.CTkOptionMenu(master=frame, values=["Dark", "Light", "System"], width=220, command=Metodos.change_appearance_mode_event)
