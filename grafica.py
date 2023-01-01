@@ -22,7 +22,7 @@ import customtkinter
 # from scipy.misc import derivative
 
 customtkinter.set_appearance_mode("dark")
-customtkinter.set_default_color_theme("dark-blue")
+customtkinter.set_default_color_theme("green")
 fun = {"sin:": "np.sin", "cos": "np.cos", "tan": "nap.tan",
        "sqrt": "np.sqrt", "exp": "np.exp", "log": "np.log", "pi": "np.pi"}
 
@@ -47,7 +47,7 @@ class Metodos:
         self.wind.geometry("1280x720")
         # self.wind.config(bg="#383838")
         self.wind.resizable(0, 0)
-        self.wind.iconbitmap("Icono_GraphMeth.ico")
+        self.wind.iconbitmap("Recursos/GraphMeth2.ico")
 
     def dibujarEjes(self, cvs, frame, lb, tlb):
         cvs.get_tk_widget().pack_forget()  # Por revisar eliminación de la grafica
@@ -237,6 +237,8 @@ class Metodos:
         elif cmb_metodos.get() == "Método de Falsa Posición":
             # messagebox.showinfo("Hola", "Método de Falsa Posición")
             Metodos.métodoDeFalsaPosicion()
+        elif cmb_metodos.get() == "Método de Newton-Raphson":
+            Metodos.métodoDeNewtonRaphson()
 
     def change_appearance_mode_event(new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
@@ -255,20 +257,20 @@ if __name__ == "__main__":
     frame2.place(x=640, y=100)
 
     # Imagenes
-    img1 = customtkinter.CTkImage(light_image=Image.open("calculadora1.png"),
-                                  dark_image=Image.open("calculadora.png"),
+    img1 = customtkinter.CTkImage(light_image=Image.open("Recursos/calculadora1.png"),
+                                  dark_image=Image.open("Recursos/calculadora.png"),
                                   size=(36, 36))
-    img2 = customtkinter.CTkImage(light_image=Image.open("grafica1.png"),
-                                  dark_image=Image.open("grafica.png"),
+    img2 = customtkinter.CTkImage(light_image=Image.open("Recursos/grafica1.png"),
+                                  dark_image=Image.open("Recursos/grafica.png"),
                                   size=(36, 36))
-    img3 = customtkinter.CTkImage(light_image=Image.open("limpiar1.png"),
-                                  dark_image=Image.open("limpiar.png"),
+    img3 = customtkinter.CTkImage(light_image=Image.open("Recursos/limpiar1.png"),
+                                  dark_image=Image.open("Recursos/limpiar.png"),
                                   size=(36, 36))
-    img4 = customtkinter.CTkImage(light_image=Image.open("info1.png"),
-                                  dark_image=Image.open("info.png"),
+    img4 = customtkinter.CTkImage(light_image=Image.open("Recursos/info1.png"),
+                                  dark_image=Image.open("Recursos/info.png"),
                                   size=(24, 24))
-    img5 = customtkinter.CTkImage(light_image=Image.open("tema1.png"),
-                                  dark_image=Image.open("tema.png"),
+    img5 = customtkinter.CTkImage(light_image=Image.open("Recursos/tema1.png"),
+                                  dark_image=Image.open("Recursos/tema.png"),
                                   size=(24, 24))
 
     lbl_img1 = customtkinter.CTkLabel(frame, image=img1, text="")
@@ -339,7 +341,7 @@ if __name__ == "__main__":
         master=frame, text="Seleccione un Método:", font=("Roboto", 14))
     lbl_combo.place(x=10, y=60)
     cmb_metodos = customtkinter.CTkComboBox(master=frame, values=[
-                                            "Método de Bisección", "Método de Falsa Posición", "Método de Newton-Raphson"], width=220)
+                                            "", "Método de Bisección", "Método de Falsa Posición", "Método de Newton-Raphson"], width=220)
     cmb_metodos.place(x=170, y=60)
     # cmb_metodos.bind("<<ComboboxSelected>>", Metodos.accionesARealizar)
 
