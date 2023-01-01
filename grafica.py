@@ -47,305 +47,17 @@ class Metodos:
         #self.wind.config(bg="#383838")
         #self.wind.resizable(0, 0)
         self.wind.iconbitmap("Icono_GraphMeth.ico")
-
-    def frameTitulo(self, frame, label):
-        frame.place(x=0, y=0)
-        #label.config(bg="#383838", fg="white", font=("Bahnschrift", 24))
-        label.place(x=500, y=10)
-
-    def frameOpciones(self, frame, radio1, radio2, combo):
-        frame.place(x=0, y=70)
-        # radio1.place(x=0, y=2)
-        # radio1.config(bg="#424141")
-        # radio2.place(x=200, y=2)
-        # radio2.config(bg="#424141")
-        combo.place(x=190, y=5)
-        textoCombo = customtkinter.CTkLabel(frame, text="Seleccione un Método: ")
-        textoCombo.place(x=10, y=1)
-
-    def frameFormula(self, frame, titulo, intervaloA, intervaloB, entry1, entry2, entry3, boton1, boton2, boton3, l1, t1):
-        frame.place(x=0, y=100)
-        titulo.place(x=335, y=25)
-        #titulo.config(font=("Bahnschrift", 18), bg="#5c5c5c", fg="white")
-        intervaloA.place(x=260, y=165)
-        #intervaloA.config(font=("Bahnschrift", 12), bg="#5c5c5c", fg="white")
-        intervaloB.place(x=440, y=165)
-        #intervaloB.config(font=("Bahnschrift", 12), bg="#5c5c5c", fg="white")
-        entry1.place(x=333, y=65)
-        entry2.place(x=280, y=195)
-        entry3.place(x=460, y=195)
-        boton1.place(x=80, y=50)
-        boton2.place(x=80, y=110)
-        boton3.place(x=80, y=170)
-        l1.place(x=390, y=95)
-        #l1.config(font=("Bahnschrift", 14), bg="#5c5c5c", fg="white")
-        t1.place(x=333, y=125)
-        #lbl_img1.place(x=30, y=50)
-        #lbl_img1.config(bg="#5c5c5c")
-        #lbl_img2.place(x=30, y=110)
-        #lbl_img2.config(bg="#5c5c5c")
-        #lbl_img3.place(x=30, y=170)
-        #lbl_img3.config(bg="#5c5c5c")
-        #lbl_img4.place(x=550, y=120)
-        #lbl_img4.config(bg="#5c5c5c")
-        #Hovertip(lbl_img4, text="¿Qué valor ingresar?\nRepresentará el eje de las Abscisas.\nPor ejemplo: -20,20", hover_delay=500)
-
-    def frameTabla(self, frame, label, trv):
-        frame.place(x=0, y=350)
-        #label.config(font=("Bahnschrift", 18), bg="#5c5c5c", fg="white")
-        label.place(x=210, y=10)
-
-        trv.column("#0", width=0, anchor=CENTER)
-        trv.column("i", width=80, anchor=CENTER)
-        trv.column("xa", width=80, anchor=CENTER)
-        trv.column("xb", width=80, anchor=CENTER)
-        trv.column("xr", width=80, anchor=CENTER)
-        trv.column("ea(%)", width=80, anchor=CENTER)
-
-        trv.heading("#0", text="", anchor=CENTER)
-        trv.heading("i", text="i", anchor=CENTER)
-        trv.heading("xa", text="Xa", anchor=CENTER)
-        trv.heading("xb", text="Xb", anchor=CENTER)
-        trv.heading("xr", text="Xr", anchor=CENTER)
-        trv.heading("ea(%)", text="Ea(%)", anchor=CENTER)
-        trv.place(x=20, y=60)
-
-        textoAutores = customtkinter.CTkLabel(master=frame, text="Desarrollado por: Gorotiza - García - Masache")
-        textoAutores.place(x=170, y=300)
-
-    def frameGrafica(self, frame, label):
-        frame.place(x=640, y=100)
-        label.place(x=100, y=200)
-
-    def dibujarEjes(self, cvs, frame, lb, tlb):
-        cvs.get_tk_widget().pack_forget()  # Por revisar eliminación de la grafica
-        lb.pack(side=TOP, fill=BOTH, expand=1)
-        cvs.draw()
-        cvs.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
-        tlb.update()
-       
-
-    def reemplaza(self, p):
-        for i in fun:
-            if i in p:
-                p = p.replace(i, fun[i])
-            return p
-
-    def animate(i):
-        global act_rango
-        global ul_ran
-        if act_rango == True:
-            try:
-                lmin = float(ran[0])
-                lmax = float(ran[1])
-                if lmin < lmax:
-                    x = np.arange(lmin, lmax, .01)  # .01
-                    ul_ran = [lmin, lmax]
-                else:
-                    act_rango = False
-            except:
-                messagebox.showwarning(
-                    "Error", "Introduzca los valores del rango de x, separado por coma.")
-                act_rango = False
-                txt_rango.delete(0, len(txt_rango.get()))
-        else:
-            if ul_ran != "":
-                x = np.arange(ul_ran[0], ul_ran[1], .01)  # .01
-            else:
-                x = np.arange(1, 10, .01)  # .01
-        try:
-            solo = f(x)
-            ax1.clear()
-
-            formula = txt_formula.get()
-            textoTitulo = ""
-            fn = sympify(formula)
-
-            textoTitulo = fn
-
-            ax1.plot(x, solo, label=textoTitulo, color="#006666")
-            ax1.legend(loc='upper right')
-            ax1.xlabel('Eje de las Abcisas')
-            ax1.ylabel('Eje de las Ordenadas')
-        except:
-            ax1.plot()
-        ax1.axhline(0, color="#6f6f6f")
-        ax1.axvline(0, color="#6f6f6f")
-        Metodos.ani.event_source.stop()  # DETIENE ANIMACIÓN
-
-    def represent():
-        global graph_data
-        global ran
-        global act_rango
-        global f
-        formula = txt_formula.get()
-        rangotex = txt_rango.get()
-
-        if formula != "" and rangotex != "":
-            x = symbols('x')
-            fn = sympify(formula)
-            f = lambdify(x, fn, "numpy")
-            print("funcion: ", str(fn))
-
-            if txt_rango.get() != "":
-                rann = txt_rango.get()
-                ran = rann.split(",")
-                act_rango = True
-            #graph_data = f(x)
-            Metodos.ani.event_source.start()  # INICIA/REANUDA ANIMACIÓN
-            Metodos.dibujarEjes(cvs, frame4, lbl_grafica, tlb)
-        else:
-            messagebox.showwarning("Atención", "Falta Fórmula o Rango")
-
-    ani = animation.FuncAnimation(fig, animate, interval=10)
-    plt.show()
-
-    def métodoDeBisección(event):
-        txt1 = txt_formula.get()
-        txt2 = txt_intervaloA.get()
-        txt3 = txt_intervaloB.get()
-        if txt1 != "" and txt2 != "" and txt3 != "":
-            formula = txt_formula.get()
-            x = symbols('x')
-            fn = sympify(formula)
-            f = lambdify(x, fn, "numpy")
-
-            a = float(txt_intervaloA.get())
-            b = float(txt_intervaloB.get())
-            crit = 0.00000001
-            i = 0
-            ea = 1
-            x_anterior = 0
-
-            while ea > crit:
-                xr = (a+b)/2
-                ea = abs((xr-x_anterior)/xr)
-
-                if f(xr) * f(a) < 0:
-                    b = xr
-                else:
-                    a = xr
-                x_anterior = xr
-                trv.insert("", END, values=(i, a, b, xr, (ea*100)))
-                i = i + 1
-            ax1.scatter(xr, 0, c="red")
-
-        else:
-            messagebox.showinfo("Atención", "Debe llenar todos los campos")
-
-    def métodoDeFalsaPosicion(event):
-        txt1 = txt_formula.get()
-        txt2 = txt_intervaloA.get()
-        txt3 = txt_intervaloB.get()
-
-        if txt1 != "" and txt2 != "" and txt3 != "":
-            formula = txt_formula.get()
-            x = symbols('x')
-            fn = sympify(formula)
-            f = lambdify(x, fn, "numpy")
-
-            a = float(txt_intervaloA.get())
-            b = float(txt_intervaloB.get())
-            crit = 0.00000001
-            i = 0
-            x_anterior = 0
-            ea = 100
-            while ea > crit:
-                xr = b - (f(b) * (a - b) / (f(a) - f(b)))
-                ea = ((xr - x_anterior) / xr) * 100
-                prod = f(xr) * f(a)
-                if prod < 0:
-                    b = xr
-                else:
-                    a = xr
-                # xold stores the previous value of xr to find absolute error.
-                x_anterior = xr
-                trv.insert("", END, values=(i, a, b, xr, ea))
-                i = i+1
-            ax1.scatter(xr, 0, c="red")
-        else:
-            messagebox.showinfo("Atención", "Debe llenar todos los campos")
-
-    def métodoDeNewtonRaphson(event):
-        formula = txt_formula.get()
-        xi = txt_intervaloA.get()
-        x = symbols('x')
-        fn = sympify(formula)
-        fx = lambdify(x, fn, "numpy")
-
-        yprima = fn.diff(x)
-        yp = sympify(yprima)
-        fdx = lambdify(x, yprima, "numpy")
-
-        ea=100
-        i=0
-        crit = 0.00001
-        while ea > crit:
-            xr = xi-(fx(xi)/fdx(xi))
-            ea=abs((xr-xi)/xr)*100
-
-            xi=xr
-
-        messagebox("resultado: " , xr)
-
-    def limpiar():
-        global trv
-        global cvs
-        txt_formula.delete(0, END)
-        txt_intervaloA.delete(0, END)
-        txt_intervaloB.delete(0, END)
-        trv.delete(*trv.get_children())
-
-    def abrirPDF(event):
-        path = 'ManualDeUsuario.pdf'
-        os.system(path)
-
-    def colorFondo():
-        #wind = root
-        #wind.config(bg="#ffffff")
-        frame1.config(bg="#ffffff")
-        lbl_formula.config(font=("Bahnschrift", 18), bg="#ffffff", fg="black")
-        lbl_intervaloA.config(font=("Bahnschrift", 12), bg="#ffffff", fg="black")
-        lbl_intervaloB.config(font=("Bahnschrift", 12), bg="#ffffff", fg="black")
-        lbl_rango.config(font=("Bahnschrift", 14), bg="#ffffff", fg="black")
-        txt_formula.config(bg="#000000", fg="white")
-        txt_intervaloA.config(bg="#000000", fg="white")
-        txt_intervaloB.config(bg="#000000", fg="white")
-        txt_rango.config(bg="#000000", fg="white")
-        btn_calcular.config(bg="#ffffff", fg="black")
-        btn_graficar.config(bg="#ffffff", fg="black")
-        btn_limpiar.config(bg="#ffffff", fg="black")
-        lbl_img1.config(bg="#ffffff",image=img5)
-        lbl_img2.config(bg="#ffffff",image=img6)
-        #lbl_img3.config(bg="#ffffff",image=img7)
-        #lbl_img4.config(bg="#ffffff",image=img8)
-        #txt_intervaloA.config(font=("Bahnschrift", 12), bg="#000000", fg="white")
-        #txt_intervaloB.config(font=("Bahnschrift", 12), bg="#000000", fg="white")
-        #txt_rango.config(font=("Bahnschrift", 14), bg="#000000", fg="white")
-
-    def accionesARealizar():
-        if cmb_metodos.current() == -1:
-            messagebox.showinfo("Atención",
-                                "Seleccione un Método")
-        elif cmb_metodos.current() == 0:
-            # messagebox.showinfo("Hola", "Método de Bisección")
-            Metodos.métodoDeBisección()
-        elif cmb_metodos.current() == 1:
-            # messagebox.showinfo("Hola", "Método de Falsa Posición")
-            Metodos.métodoDeFalsaPosicion()
-        elif cmb_metodos.current() == 2:
-            #Metodos.métodoDeNewtonRaphson()
-            Metodos.abrirPDF()
+        
+    def change_appearance_mode_event(new_appearance_mode: str):
+        customtkinter.set_appearance_mode(new_appearance_mode)
+    
 
 if __name__ == "__main__":
     root = customtkinter.CTk()
 
     # Frames Creados
-    frame = customtkinter.CTkFrame(master = root, width=1280, height=70)  # Titulo
-    frame1 = customtkinter.CTkFrame(master = root, width=1280, height=70)  # Formula
-    frame2 = customtkinter.CTkFrame(master = root, width=640, height=250)  # Opciones
-    frame3 = customtkinter.CTkFrame(master = root, width=640, height=370)  # Tabla
-    frame4 = customtkinter.CTkFrame(master = root, width=640, height=620)  # Grafica
+    frame = customtkinter.CTkFrame(master = root, width=1280, height=720)  # Titulo
+    frame.place(x=0, y=0)
 
     # Imagenes
     img1 = PhotoImage(file="calculadora.png")
@@ -358,62 +70,63 @@ if __name__ == "__main__":
     img8 = PhotoImage(file="info1.png")
 
     # Labels Creados
-    lbl_titulo = customtkinter.CTkLabel(master = frame, text="Métodos Numéricos")
-    lbl_formula = customtkinter.CTkLabel(master =frame1, text="Ingrese Fórmula")
-    lbl_intervaloA = customtkinter.CTkLabel(master =frame1, text="Ingrese Intervalo [Xa]")
-    lbl_intervaloB = customtkinter.CTkLabel(master =frame1, text="Ingrese Intervalo [Xb]")
-    lbl_table = customtkinter.CTkLabel(master =frame3, text="Tabla de Resultados")
-    lbl_grafica = customtkinter.CTkLabel(master =frame4, text="Gráfica")
+    lbl_titulo = customtkinter.CTkLabel(master = frame, text="Métodos Numéricos", font=("Roboto",25))
+    lbl_titulo.place(x=530, y=15)
+    lbl_formula = customtkinter.CTkLabel(master =frame, text="Ingrese Fórmula", font=("Roboto",20))
+    lbl_formula.place(x=360,y=130)
+    lbl_intervaloA = customtkinter.CTkLabel(master =frame, text="Ingrese Intervalo [Xa]", font=("Roboto",15))
+    lbl_intervaloA.place(x=280, y=220)
+    lbl_intervaloB = customtkinter.CTkLabel(master =frame, text="Ingrese Intervalo [Xb]", font=("Roboto",15))
+    lbl_intervaloB.place(x=450, y=220)
+    lbl_table = customtkinter.CTkLabel(master =frame, text="Tabla de Resultados", font=("Roboto",24))
+    lbl_table.place(x=230, y=330)
+    lbl_grafica = customtkinter.CTkLabel(master =frame, text="Gráfica")
     #lbl_img1 = customtkinter.CTkLabel(master =frame1, image=img1)
     #lbl_img2 = customtkinter.CTkLabel(master =frame1, image=img2)
     #lbl_img3 = customtkinter.CTkLabel(master =frame1, image=img3)
     #lbl_img4 = customtkinter.CTkLabel(master =frame1, image=img4)
     # Para la Grafica
-    lbl_rango = customtkinter.CTkLabel(master =frame1, text="Rango")
-    txt_rango = customtkinter.CTkLabel(master =frame1)
+    lbl_rango = customtkinter.CTkLabel(master =frame, text="Rango")
+    txt_rango = customtkinter.CTkLabel(master =frame)
 #    txt_rango.insert(0,"-20,20")
 
     # Entrys Creados
-    txt_formula = customtkinter.CTkEntry(master =frame1)
-    txt_intervaloA = customtkinter.CTkEntry(master =frame1)
-    txt_intervaloB = customtkinter.CTkEntry(master =frame1)
+    txt_formula = customtkinter.CTkEntry(master =frame, font=("Roboto", 15), width=180, justify="center")
+    txt_formula.place(x=340, y=170)
+    txt_intervaloA = customtkinter.CTkEntry(master =frame, font=("Roboto", 15), width=140, justify="center")
+    txt_intervaloA.place(x=280, y=260)
+    txt_intervaloB = customtkinter.CTkEntry(master =frame, font=("Roboto", 15), width=140, justify="center")
+    txt_intervaloB.place(x=450, y=260)
 
     # Radios Creados
-    rbt_biseccion = Radiobutton(frame2, text="Método de Bisección")
+    rbt_biseccion = Radiobutton(frame, text="Método de Bisección")
     rbt_falsaposicion = Radiobutton(
-        frame2, text="Método de Falsa Posición")
+        frame, text="Método de Falsa Posición")
 
     # Combobox creados
-    cmb_metodos = customtkinter.CTkComboBox(master = frame2, values=["Método de Bisección", "Método de Falsa Posición", "Método de Newton-Raphson"])
+    lbl_combo = customtkinter.CTkLabel(master =frame, text="Seleccione un Método:", font=("Roboto",14))
+    lbl_combo.place(x=10, y=60)
+    cmb_metodos = customtkinter.CTkComboBox(master = frame, values=["Método de Bisección", "Método de Falsa Posición", "Método de Newton-Raphson"], width=220)
+    cmb_metodos.place(x=170, y=60)
     # cmb_metodos.bind("<<ComboboxSelected>>", Metodos.accionesARealizar)
 
     # Tabla Creada
-    trv = ttk.Treeview(frame3, columns=("i", "xa", "xb", "xr", "ea(%)"))
-
-    # Grafica
-    cvs = FigureCanvasTkAgg(fig, frame4)
-    tlb = NavigationToolbar2Tk(cvs, frame4)
-
+    trv = ttk.Treeview(frame, columns=("i", "xa", "xb", "xr", "ea(%)"))
 
     # Buttons Creados
-    btn_calcular = customtkinter.CTkButton(master=frame1, text="Calcular", command=Metodos.accionesARealizar)
-    btn_graficar = customtkinter.CTkButton(master=frame1, text="Graficar", command=Metodos.represent)
-    btn_limpiar = customtkinter.CTkButton(master=frame1, text="Nuevo",command=Metodos.limpiar)
-    btn_modo = customtkinter.CTkButton(master=frame, text="Modo", command=Metodos.colorFondo)
-    btn_modo.place(x=900, y=0)
-    
+    btn_calcular = customtkinter.CTkButton(master=frame, text="Calcular", width=150, height=40, font=("Roboto", 16))
+    btn_calcular.place(x=80, y=140)
+    btn_graficar = customtkinter.CTkButton(master=frame, text="Graficar", width=150, height=40, font=("Roboto", 16))
+    btn_graficar.place(x=80, y=200)
+    btn_limpiar = customtkinter.CTkButton(master=frame, text="Nuevo", width=150, height=40, font=("Roboto", 16))
+    btn_limpiar.place(x=80, y=260)
+
+    cmb_modo = customtkinter.CTkOptionMenu(master=frame, values=["Dark", "Light", "System"], width=220, command=Metodos.change_appearance_mode_event)
+    cmb_modo.place(x=900, y=0)
+
     # Inicialización de la Clase
     Metodos = Metodos(root)
 
-    # Uso de Recursos
-    Metodos.frameTitulo(frame, lbl_titulo)
-    Metodos.frameFormula(frame1, lbl_formula, lbl_intervaloA, lbl_intervaloB, txt_formula,
-                         txt_intervaloA, txt_intervaloB, btn_calcular, btn_graficar,
-                         btn_limpiar, lbl_rango, txt_rango)
-    Metodos.frameOpciones(frame2, rbt_biseccion,
-                          rbt_falsaposicion, cmb_metodos)
-    Metodos.frameTabla(frame3, lbl_table, trv)
-    Metodos.frameGrafica(frame4, lbl_grafica)
-    # Metodos.dibujarEjes(cvs, frame4)
+
 
 root.mainloop()
