@@ -43,7 +43,7 @@ class Metodos:
         self.wind.geometry("1280x720")
         self.wind.config(bg="#383838")
         self.wind.resizable(0, 0)
-        self.wind.iconbitmap("Icono_GraphMeth.ico")
+        self.wind.iconbitmap("Recursos/Icono_GraphMeth.ico")
 
     def frameTitulo(self, frame, label):
         frame.config(bg="#383838", width="1280", height="70")
@@ -321,8 +321,8 @@ class Metodos:
         btn_limpiar.config(bg="#ffffff", fg="black")
         lbl_img1.config(bg="#ffffff",image=img5)
         lbl_img2.config(bg="#ffffff",image=img6)
-        #lbl_img3.config(bg="#ffffff",image=img7)
-        #lbl_img4.config(bg="#ffffff",image=img8)
+        lbl_img3.config(bg="#ffffff",image=img7)
+        lbl_img4.config(bg="#ffffff",image=img8)
         #txt_intervaloA.config(font=("Bahnschrift", 12), bg="#000000", fg="white")
         #txt_intervaloB.config(font=("Bahnschrift", 12), bg="#000000", fg="white")
         #txt_rango.config(font=("Bahnschrift", 14), bg="#000000", fg="white")
@@ -352,14 +352,14 @@ if __name__ == "__main__":
     frame4 = Frame()  # Grafica
 
     # Imagenes
-    img1 = PhotoImage(file="calculadora.png")
-    img2 = PhotoImage(file="grafica.png")
-    img3 = PhotoImage(file="limpiar.png")
-    img4 = PhotoImage(file="info.png")
-    img5 = PhotoImage(file="calculadora1.png")
-    img6 = PhotoImage(file="grafica1.png")
-    img7 = PhotoImage(file="limpiar1.png")
-    img8 = PhotoImage(file="info1.png")
+    img1 = PhotoImage(file="Recursos/calculadora.png")
+    img2 = PhotoImage(file="Recursos/grafica.png")
+    img3 = PhotoImage(file="Recursos/limpiar.png")
+    img4 = PhotoImage(file="Recursos/info.png")
+    img5 = PhotoImage(file="Recursos/calculadora1.png")
+    img6 = PhotoImage(file="Recursos/grafica1.png")
+    img7 = PhotoImage(file="Recursos/limpiar1.png")
+    img8 = PhotoImage(file="Recursos/info1.png")
 
     # Labels Creados
     lbl_titulo = Label(frame, text="Métodos Numéricos")
