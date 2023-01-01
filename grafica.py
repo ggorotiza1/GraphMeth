@@ -45,17 +45,16 @@ class Metodos:
         self.wind = root
         self.wind.title("GraphMeth - Métodos Cerrados - Cuarto 'A'")
         self.wind.geometry("1280x720")
-        #self.wind.config(bg="#383838")
+        # self.wind.config(bg="#383838")
         self.wind.resizable(0, 0)
         self.wind.iconbitmap("Icono_GraphMeth.ico")
-        
+
     def dibujarEjes(self, cvs, frame, lb, tlb):
         cvs.get_tk_widget().pack_forget()  # Por revisar eliminación de la grafica
         lb.pack(side=TOP, fill=BOTH, expand=1)
         cvs.draw()
         cvs.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
         tlb.update()
-       
 
     def reemplaza(self, p):
         for i in fun:
@@ -123,7 +122,7 @@ class Metodos:
                 rann = txt_rango.get()
                 ran = rann.split(",")
                 act_rango = True
-            #graph_data = f(x)
+            # graph_data = f(x)
             Metodos.ani.event_source.start()  # INICIA/REANUDA ANIMACIÓN
             Metodos.dibujarEjes(cvs, frame, lbl_grafica, tlb)
         else:
@@ -209,16 +208,16 @@ class Metodos:
         yp = sympify(yprima)
         fdx = lambdify(x, yprima, "numpy")
 
-        ea=100
-        i=0
+        ea = 100
+        i = 0
         crit = 0.00001
         while ea > crit:
             xr = xi-(fx(xi)/fdx(xi))
-            ea=abs((xr-xi)/xr)*100
+            ea = abs((xr-xi)/xr)*100
 
-            xi=xr
+            xi = xr
 
-        messagebox("resultado: " , xr)
+        messagebox("resultado: ", xr)
 
     def limpiar():
         global trv
@@ -241,16 +240,18 @@ class Metodos:
 
     def change_appearance_mode_event(new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
-    
+
 
 if __name__ == "__main__":
     root = customtkinter.CTk()
 
     # Frames Creados
-    frame = customtkinter.CTkFrame(master = root, width=1280, height=720)  # Titulo
+    frame = customtkinter.CTkFrame(
+        master=root, width=1280, height=720)  # Titulo
     frame.place(x=0, y=0)
 
-    frame2 = customtkinter.CTkFrame(master = root, width=640, height=720, bg_color="#ffffff")  # Titulo
+    frame2 = customtkinter.CTkFrame(
+        master=root, width=640, height=720, bg_color="#ffffff")  # Titulo
     frame2.place(x=640, y=100)
 
     # Imagenes
@@ -266,6 +267,9 @@ if __name__ == "__main__":
     img4 = customtkinter.CTkImage(light_image=Image.open("info1.png"),
                                   dark_image=Image.open("info.png"),
                                   size=(24, 24))
+    img5 = customtkinter.CTkImage(light_image=Image.open("tema1.png"),
+                                  dark_image=Image.open("tema.png"),
+                                  size=(24, 24))
 
     lbl_img1 = customtkinter.CTkLabel(frame, image=img1, text="")
     lbl_img1.place(x=30, y=163)
@@ -275,41 +279,54 @@ if __name__ == "__main__":
     lbl_img3.place(x=30, y=283)
     lbl_img4 = customtkinter.CTkLabel(frame, image=img4, text="")
     lbl_img4.place(x=540, y=210)
+    lbl_img5 = customtkinter.CTkLabel(frame, image=img5, text="")
+    lbl_img5.place(x=960, y=19)
     Hovertip(lbl_img4, text="¿Qué valor ingresar?\nRepresentará el eje de las Abscisas.\nPor ejemplo: -20,20", hover_delay=500)
 
-
     # Labels Creados
-    lbl_titulo = customtkinter.CTkLabel(master = frame, text="Métodos Numéricos", font=("Roboto",25))
+    lbl_titulo = customtkinter.CTkLabel(
+        master=frame, text="Métodos Numéricos", font=("Roboto", 25))
     lbl_titulo.place(x=530, y=15)
-    lbl_formula = customtkinter.CTkLabel(master =frame, text="Ingrese Fórmula", font=("Roboto",20))
-    lbl_formula.place(x=360,y=130)
-    lbl_intervaloA = customtkinter.CTkLabel(master =frame, text="Ingrese Intervalo [Xa]", font=("Roboto",15))
+    lbl_formula = customtkinter.CTkLabel(
+        master=frame, text="Ingrese Fórmula", font=("Roboto", 20))
+    lbl_formula.place(x=360, y=130)
+    lbl_intervaloA = customtkinter.CTkLabel(
+        master=frame, text="Ingrese Intervalo [Xa]", font=("Roboto", 15))
     lbl_intervaloA.place(x=280, y=280)
-    lbl_intervaloB = customtkinter.CTkLabel(master =frame, text="Ingrese Intervalo [Xb]", font=("Roboto",15))
+    lbl_intervaloB = customtkinter.CTkLabel(
+        master=frame, text="Ingrese Intervalo [Xb]", font=("Roboto", 15))
     lbl_intervaloB.place(x=450, y=280)
-    lbl_table = customtkinter.CTkLabel(master =frame, text="Tabla de Resultados", font=("Roboto",24))
+    lbl_table = customtkinter.CTkLabel(
+        master=frame, text="Tabla de Resultados", font=("Roboto", 24))
     lbl_table.place(x=230, y=370)
-    lbl_grafica = customtkinter.CTkLabel(master =frame2, text="Gráfica", font=("Roboto", 24))
-    #lbl_img1 = customtkinter.CTkLabel(master =frame1, image=img1)
-    #lbl_img2 = customtkinter.CTkLabel(master =frame1, image=img2)
-    #lbl_img3 = customtkinter.CTkLabel(master =frame1, image=img3)
-    #lbl_img4 = customtkinter.CTkLabel(master =frame1, image=img4)
+    lbl_grafica = customtkinter.CTkLabel(
+        master=frame2, text="Gráfica", font=("Roboto", 24))
+    lbl_grafica.pack(pady=10)
+    # lbl_img1 = customtkinter.CTkLabel(master =frame1, image=img1)
+    # lbl_img2 = customtkinter.CTkLabel(master =frame1, image=img2)
+    # lbl_img3 = customtkinter.CTkLabel(master =frame1, image=img3)
+    # lbl_img4 = customtkinter.CTkLabel(master =frame1, image=img4)
     # Para la Grafica
-    lbl_rango = customtkinter.CTkLabel(master =frame, text="Rango", font=("Roboto", 20))
+    lbl_rango = customtkinter.CTkLabel(
+        master=frame, text="Rango", font=("Roboto", 20))
     lbl_rango.place(x=400, y=210)
-    txt_rango = customtkinter.CTkEntry(master =frame, font=("Roboto", 15), width=180, justify="center")
+    txt_rango = customtkinter.CTkEntry(master=frame, font=(
+        "Roboto", 15), width=180, justify="center")
     txt_rango.place(x=340, y=240)
     txt_rango.insert(END, "-20,20")
-#    txt_rango.insert(0,"-20,20")
 
     # Entrys Creados
-    txt_formula = customtkinter.CTkEntry(master =frame, font=("Roboto", 15), width=180, justify="center", placeholder_text="Ej: sin(x)", border_width=2)
+    txt_formula = customtkinter.CTkEntry(master=frame, font=(
+        "Roboto", 15), width=180, justify="center", placeholder_text="Ej: sin(x)", border_width=2)
     txt_formula.place(x=340, y=170)
-    txt_intervaloA = customtkinter.CTkEntry(master =frame, font=("Roboto", 15), width=140, justify="center", placeholder_text="Ej: -1 o 0", border_width=2)
+    txt_intervaloA = customtkinter.CTkEntry(master=frame, font=(
+        "Roboto", 15), width=140, justify="center", placeholder_text="Ej: -1 o 0", border_width=2)
     txt_intervaloA.place(x=280, y=320)
-    txt_intervaloB = customtkinter.CTkEntry(master =frame, font=("Roboto", 15), width=140, justify="center", placeholder_text="Ej: 0 o 1", border_width=2)
+    txt_intervaloB = customtkinter.CTkEntry(master=frame, font=(
+        "Roboto", 15), width=140, justify="center", placeholder_text="Ej: 0 o 1", border_width=2)
     txt_intervaloB.place(x=450, y=320)
-    textoAutores = customtkinter.CTkLabel(master=frame, text="Desarrollado por: Gorotiza - García - Masache", font=("Roboto", 16))
+    textoAutores = customtkinter.CTkLabel(
+        master=frame, text="Desarrollado por: Gorotiza - García - Masache", font=("Roboto", 16))
     textoAutores.place(x=155, y=660)
 
     # Radios Creados
@@ -318,9 +335,11 @@ if __name__ == "__main__":
         frame, text="Método de Falsa Posición")
 
     # Combobox creados
-    lbl_combo = customtkinter.CTkLabel(master =frame, text="Seleccione un Método:", font=("Roboto",14))
+    lbl_combo = customtkinter.CTkLabel(
+        master=frame, text="Seleccione un Método:", font=("Roboto", 14))
     lbl_combo.place(x=10, y=60)
-    cmb_metodos = customtkinter.CTkComboBox(master = frame, values=["Método de Bisección", "Método de Falsa Posición", "Método de Newton-Raphson"], width=220)
+    cmb_metodos = customtkinter.CTkComboBox(master=frame, values=[
+                                            "Método de Bisección", "Método de Falsa Posición", "Método de Newton-Raphson"], width=220)
     cmb_metodos.place(x=170, y=60)
     # cmb_metodos.bind("<<ComboboxSelected>>", Metodos.accionesARealizar)
 
@@ -347,24 +366,26 @@ if __name__ == "__main__":
     trv.place(x=20, y=410, width=600)
 
     # Buttons Creados
-    btn_calcular = customtkinter.CTkButton(master=frame, text="Calcular", width=150, height=40, font=("Roboto", 16), command=Metodos.accionesARealizar, border_width=2)
+    btn_calcular = customtkinter.CTkButton(master=frame, text="Calcular", width=150, height=40, font=(
+        "Roboto", 16), command=Metodos.accionesARealizar, border_width=2)
     btn_calcular.place(x=80, y=160)
-    btn_graficar = customtkinter.CTkButton(master=frame, text="Graficar", width=150, height=40, font=("Roboto", 16), command=Metodos.represent, border_width=2)
+    btn_graficar = customtkinter.CTkButton(master=frame, text="Graficar", width=150, height=40, font=(
+        "Roboto", 16), command=Metodos.represent, border_width=2)
     btn_graficar.place(x=80, y=220)
-    btn_limpiar = customtkinter.CTkButton(master=frame, text="Nuevo", width=150, height=40, font=("Roboto", 16), command=Metodos.limpiar, border_width=2)
+    btn_limpiar = customtkinter.CTkButton(master=frame, text="Nuevo", width=150, height=40, font=(
+        "Roboto", 16), command=Metodos.limpiar, border_width=2)
     btn_limpiar.place(x=80, y=280)
 
-    cmb_modo = customtkinter.CTkOptionMenu(master=frame, values=["Dark", "Light", "System"], width=220, command=Metodos.change_appearance_mode_event)
+    cmb_modo = customtkinter.CTkOptionMenu(master=frame, values=[
+                                           "System", "Dark", "Light", ], width=220, command=Metodos.change_appearance_mode_event)
     cmb_modo.place(x=1000, y=20)
-
 
     # Grafica
     cvs = FigureCanvasTkAgg(fig, frame2)
-    #cvs.get_tk_widget().place(x = 640, y = 100)
+    # cvs.get_tk_widget().place(x = 640, y = 100)
     tlb = NavigationToolbar2Tk(cvs, frame2)
     # Inicialización de la Clase
     Metodos = Metodos(root)
-
 
 
 root.mainloop()
