@@ -22,7 +22,7 @@ import customtkinter
 # from scipy.misc import derivative
 
 customtkinter.set_appearance_mode("dark")
-customtkinter.set_default_color_theme("green")
+customtkinter.set_default_color_theme("dark-blue")
 fun = {"sin:": "np.sin", "cos": "np.cos", "tan": "nap.tan",
        "sqrt": "np.sqrt", "exp": "np.exp", "log": "np.log", "pi": "np.pi"}
 
@@ -47,7 +47,7 @@ class Metodos:
         self.wind.geometry("1280x720")
         # self.wind.config(bg="#383838")
         self.wind.resizable(0, 0)
-        self.wind.iconbitmap("Recursos/GraphMeth2.ico")
+        self.wind.iconbitmap("Recursos/GraphMeth2.0.ico")
 
     def dibujarEjes(self, cvs, frame, lb, tlb):
         cvs.get_tk_widget().pack_forget()  # Por revisar eliminación de la grafica
@@ -283,7 +283,7 @@ if __name__ == "__main__":
     lbl_img4.place(x=540, y=210)
     lbl_img5 = customtkinter.CTkLabel(frame, image=img5, text="")
     lbl_img5.place(x=960, y=19)
-    Hovertip(lbl_img4, text="¿Qué valor ingresar?\nRepresentará el eje de las Abscisas.\nPor ejemplo: -20,20", hover_delay=500)
+    Hovertip(lbl_img4, text="¿Qué valor ingresar?\nRepresentará el eje de las abscisas.\nPor ejemplo: -20,20", hover_delay=500)
 
     # Labels Creados
     lbl_titulo = customtkinter.CTkLabel(
