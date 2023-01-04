@@ -143,7 +143,7 @@ class Metodos:
 
             a = float(txt_intervaloA.get())
             b = float(txt_intervaloB.get())
-            crit = 0.00000001
+            crit = 0.0000001
             i = 0
             ea = 1
             x_anterior = 0
@@ -152,7 +152,7 @@ class Metodos:
                 xr = (a+b)/2
                 ea = abs((xr-x_anterior)/xr)
 
-                if f(xr) * f(a) < 0:
+                if (f(xr) * f(a)) < 0:
                     b = xr
                 else:
                     a = xr
@@ -177,7 +177,7 @@ class Metodos:
 
             a = float(txt_intervaloA.get())
             b = float(txt_intervaloB.get())
-            crit = 0.00000001
+            crit = 0.0000001
             i = 0
             x_anterior = 0
             ea = 100
