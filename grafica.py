@@ -160,7 +160,7 @@ class Metodos:
                 else:
                     a = xr
                 x_anterior = xr
-                trv.insert("", END, values=(i, a, b, xr, (ea*100)))
+                trv.insert("", END, values=(i, a, b, x_anterior, (ea*100)))
                 i = i + 1
             ax1.scatter(xr, 0, c="red")
 
@@ -181,21 +181,27 @@ class Metodos:
             a = float(txt_intervaloA.get())
             b = float(txt_intervaloB.get())
             crit = 0.0000001
-            i = 0
-            x_anterior = 0
-            ea = 100
+            i = -1
+            xr_anterior = 0
+            xr=(a*f(b) - b*f(a)) / (f(b) - f(a))
+
+            ea = abs(xr-xr_anterior)
             while ea > crit:
-                xr = b - (f(b) * (a - b) / (f(a) - f(b)))
-                ea = ((xr - x_anterior) / xr) * 100
-                prod = f(xr) * f(a)
-                if prod < 0:
-                    b = xr
+                xr_anterior = (a*f(b) - b*f(a)) / (f(b) - f(a))
+                if f(a) * f(b) >=0:
+                    messagebox.showinfo("Error", "Error")
+                    quit()
+                elif f(xr_anterior) * f(a) <0:
+                    ea = abs(xr_anterior - b)
+                    b=xr_anterior
+                    i=i+1
+                elif f(xr_anterior) * f(b) <0:
+                    ea = abs(xr_anterior - a)
+                    a=xr_anterior
+                    i=i+1
                 else:
-                    a = xr
-                # xold stores the previous value of xr to find absolute error.
-                x_anterior = xr
-                trv.insert("", END, values=(i, a, b, xr, ea))
-                i = i+1
+                    messagebox.showinfo("Error", "Error")
+                trv.insert("", END, values=(i, a, b, xr_anterior, ea))
             ax1.scatter(xr, 0, c="red")
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
