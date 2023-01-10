@@ -36,12 +36,11 @@ fig = Figure()
 # Estilos de la Gráfica
 # style.use('fivethirtyeight')
 # style.use('dark_background')
-# style.use('seaborn-v0_8-pastel')
-style.use('Solarize_Light2')
+style.use('seaborn-v0_8-pastel')
+# style.use('Solarize_Light2')
 # style.use('ggplot')
 
 ax1 = fig.add_subplot(111)
-
 
 class Metodos:
     def __init__(self, root):
@@ -362,8 +361,6 @@ if __name__ == "__main__":
     cvs = FigureCanvasTkAgg(fig, frame2)
     tlb = NavigationToolbar2Tk(cvs, frame2)
 
-
-    
     # Inicialización de la Clase
     Metodos = Metodos(root)
 
