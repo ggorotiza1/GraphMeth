@@ -39,7 +39,7 @@ ran = ""
 # Estilos de la Gráfica
 # style.use('fivethirtyeight')
 # style.use('dark_background')
-style.use('seaborn-v0_8-pastel')
+plt.style.use('bmh')
 # style.use('Solarize_Light2')
 # style.use('ggplot')
 
@@ -80,7 +80,7 @@ class Metodos:
                 x_anterior = xr
                 trv.insert("", END, values=(i, a, b, x_anterior, (ea*100)))
                 i = i + 1
-            ax.scatter(xr, 0, c="red")
+            plt.scatter(xr, 0, c="red")
 
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
@@ -121,48 +121,52 @@ class Metodos:
                 else:
                     messagebox.showinfo("Error", "Error")
                 trv.insert("", END, values=(i, a, b, xr_anterior, ea))
-            ax.scatter(xr, 0, c="red")
+            plt.scatter(xr, 0, c="red")
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
     def graficar():
-        global ax
+        global fig
         global canvas
         global toolbar
         rann = txt_rango.get()
         ran = rann.split(",")
         lmin = float(ran[0])
         lmax = float(ran[1])
+        rann1 = txt_rango1.get()
+        ran1 = rann1.split(",")
+        lmin1 = float(ran1[0])
+        lmax1 = float(ran1[1])
         xpts = np.arange(lmin, lmax, 0.1)
         formula = txt_formula.get()
         x = symbols('x')
         fn = sympify(formula)
-        f = lambdify(x, fn)
+        f = lambdify(x, fn, "numpy")
 
-        fig = Figure(figsize=(6, 5), dpi=100)
-
+        fig = plt.figure()
+        plt.plot(xpts, f(xpts))
+        plt.axhline(color="#6f6f6f")
+        plt.axvline(color="#6f6f6f")
+        plt.grid(True, which='both')
+        plt.ylim(lmin1, lmax1)
+        
         canvas = FigureCanvasTkAgg(fig, master=frame2)
-        ax = fig.add_subplot(111)
-        ax.plot(xpts, f(xpts), label=fn, color="#006666")
-        ax.axhline(0, color="#6f6f6f")
-        ax.axvline(0, color="#6f6f6f")
-        ax.grid(True, which='both')
-        ax.legend(loc='upper right')
+
         
         canvas.draw()
-
         toolbar = NavigationToolbar2Tk(canvas, frame2)
         toolbar.update()
 
         canvas.get_tk_widget().pack(side=customtkinter.TOP,
                                     fill=customtkinter.BOTH, expand=True)
 
+        
     def limpiar():
         txt_formula.delete(0, END)
         txt_intervaloA.delete(0, END)
         txt_intervaloB.delete(0, END)
         trv.delete(*trv.get_children())
-        ax.clear()
+        fig.clf()
         canvas.get_tk_widget().destroy()
         toolbar.destroy()
         canvas.draw()
@@ -199,9 +203,13 @@ if __name__ == "__main__":
 
     # Entry
     txt_rango = customtkinter.CTkEntry(master=frame, font=(
-        "Roboto", 15), width=180, justify="center")
-    txt_rango.place(x=340, y=240)
+        "Roboto", 15), width=140, justify="center")
+    txt_rango.place(x=280, y=240)
     txt_rango.insert(END, "-20,20")
+    txt_rango1 = customtkinter.CTkEntry(master=frame, font=(
+        "Roboto", 15), width=140, justify="center")
+    txt_rango1.place(x=450, y=240)
+    txt_rango1.insert(END, "-20,20")
     txt_formula = customtkinter.CTkEntry(master=frame, font=(
         "Roboto", 15), width=180, justify="center", placeholder_text="Ej: sin(x)", border_width=2)
     txt_formula.place(x=340, y=170)
@@ -243,10 +251,10 @@ if __name__ == "__main__":
     lbl_img3 = customtkinter.CTkLabel(frame, image=img3, text="")
     lbl_img3.place(x=30, y=283)
     lbl_img4 = customtkinter.CTkLabel(frame, image=img4, text="")
-    lbl_img4.place(x=540, y=210)
+    lbl_img4.place(x=600, y=210)
     lbl_img5 = customtkinter.CTkLabel(frame, image=img5, text="")
     lbl_img5.place(x=960, y=19)
-    Hovertip(lbl_img4, text="¿Qué valor ingresar?\nRepresentará el eje de las abscisas.\nPor ejemplo: -20,20", hover_delay=500)
+    Hovertip(lbl_img4, text="¿Qué valor ingresar?\nLim X\nRepresentará el eje de las abscisas.\nPor ejemplo: -20,20", hover_delay=500)
 
     lbl_titulo = customtkinter.CTkLabel(
         master=frame, text="Métodos Numéricos", font=("Roboto", 25))
@@ -267,8 +275,11 @@ if __name__ == "__main__":
         master=frame2, text="Gráfica", font=("Roboto", 24))
     lbl_grafica.pack(pady=10)
     lbl_rango = customtkinter.CTkLabel(
-        master=frame, text="Rango", font=("Roboto", 20))
-    lbl_rango.place(x=400, y=210)
+        master=frame, text="Lim X", font=("Roboto", 20))
+    lbl_rango.place(x=330, y=210)
+    lbl_rango1 = customtkinter.CTkLabel(
+        master=frame, text="Lim Y", font=("Roboto", 20))
+    lbl_rango1.place(x=490, y=210)
     lbl_combo = customtkinter.CTkLabel(
         master=frame, text="Seleccione un Método:", font=("Roboto", 14))
     lbl_combo.place(x=10, y=60)
