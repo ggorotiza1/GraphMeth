@@ -20,6 +20,9 @@ import os
 from PIL import Image
 import customtkinter
 # from scipy.misc import derivative
+import matplotlib
+matplotlib.use("TkAgg")
+
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
@@ -31,7 +34,7 @@ vocales = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
 act_rango = False
 ul_ran = ""
 ran = ""
-fig = Figure()
+
 
 # Estilos de la Gráfica
 # style.use('fivethirtyeight')
@@ -40,7 +43,6 @@ style.use('seaborn-v0_8-pastel')
 # style.use('Solarize_Light2')
 # style.use('ggplot')
 
-ax1 = fig.add_subplot(111)
 
 class Metodos:
     def __init__(self, root):
@@ -49,89 +51,6 @@ class Metodos:
         self.wind.geometry("1280x720")
         self.wind.resizable(0, 0)
         self.wind.iconbitmap("Recursos/GraphMeth2.0.ico")
-
-    def dibujarEjes(self, cvs, frame, lb, tlb):
-        cvs.get_tk_widget().pack_forget()  # Por revisar eliminación de la grafica
-        lb.pack(side=TOP, fill=BOTH, expand=1)
-        cvs.draw()
-        cvs.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
-        tlb.update()
-
-    def reemplaza(self, p):
-        for i in fun:
-            if i in p:
-                p = p.replace(i, fun[i])
-            return p
-
-    def animate(i):
-        global act_rango
-        global ul_ran
-        if act_rango == True:
-            try:
-                lmin = float(ran[0])
-                lmax = float(ran[1])
-                if lmin < lmax:
-                    x = np.arange(lmin, lmax, .01)  # .01
-                    ul_ran = [lmin, lmax]
-                else:
-                    act_rango = False
-            except:
-                messagebox.showwarning(
-                    "Error", "Introduzca los valores del rango de x, separado por coma.")
-                act_rango = False
-                txt_rango.delete(0, ran)
-        else:
-            if ul_ran != "":
-                x = np.arange(ul_ran[0], ul_ran[1], .01)  # .01
-            else:
-                x = np.arange(1, 10, .01)  # .01
-        try:
-            solo = f(x)
-            ax1.clear()
-
-            formula = txt_formula.get()
-            textoTitulo = ""
-            fn = sympify(formula)
-
-            textoTitulo = fn
-
-            ax1.plot(x, solo, label=textoTitulo, color="#006666") 
-            ax1.legend(loc='upper right')
-            ax1.xlabel('Eje de las Abcisas')
-            ax1.ylabel('Eje de las Ordenadas')
-        except:
-            ax1.plot()
-        ax1.axhline(0, color="#6f6f6f")
-        ax1.axvline(0, color="#6f6f6f")
-        Metodos.ani.event_source.stop()  # DETIENE ANIMACIÓN
-
-    def represent():
-        global graph_data
-
-        global ran
-        global act_rango
-        global f
-        formula = txt_formula.get()
-        rangotex = txt_rango.get()
-
-        if formula != "" and rangotex != "":
-            x = symbols('x')
-            fn = sympify(formula)
-            f = lambdify(x, fn, "numpy")
-            print("funcion: ", str(fn))
-
-            if txt_rango.get() != "":
-                rann = txt_rango.get()
-                ran = rann.split(",")
-                act_rango = True
-            # graph_data = f(x)
-            Metodos.ani.event_source.start()  # INICIA/REANUDA ANIMACIÓN
-            Metodos.dibujarEjes(cvs, frame, lbl_grafica, tlb)
-        else:
-            messagebox.showwarning("Atención", "Falta Fórmula o Rango")
-
-    ani = animation.FuncAnimation(fig, animate, interval=10)
-    plt.show()
 
     def métodoDeBisección(event):
         txt1 = txt_formula.get()
@@ -161,7 +80,7 @@ class Metodos:
                 x_anterior = xr
                 trv.insert("", END, values=(i, a, b, x_anterior, (ea*100)))
                 i = i + 1
-            ax1.scatter(xr, 0, c="red")
+            # ax1.scatter(xr, 0, c="red")
 
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
@@ -182,29 +101,49 @@ class Metodos:
             crit = 0.0000001
             i = -1
             xr_anterior = 0
-            xr=(a*f(b) - b*f(a)) / (f(b) - f(a))
+            xr = (a*f(b) - b*f(a)) / (f(b) - f(a))
 
             ea = abs(xr-xr_anterior)
-            
+
             while ea > crit:
                 xr_anterior = (a*f(b) - b*f(a)) / (f(b) - f(a))
-                if f(a) * f(b) >=0:
+                if f(a) * f(b) >= 0:
                     messagebox.showinfo("Error", "Error")
                     quit()
-                elif f(xr_anterior) * f(a) <0:
+                elif f(xr_anterior) * f(a) < 0:
                     ea = abs(xr_anterior - b)
-                    b=xr_anterior
-                    i=i+1
-                elif f(xr_anterior) * f(b) <0:
+                    b = xr_anterior
+                    i = i+1
+                elif f(xr_anterior) * f(b) < 0:
                     ea = abs(xr_anterior - a)
-                    a=xr_anterior
-                    i=i+1
+                    a = xr_anterior
+                    i = i+1
                 else:
                     messagebox.showinfo("Error", "Error")
                 trv.insert("", END, values=(i, a, b, xr_anterior, ea))
-            ax1.scatter(xr, 0, c="red")
+            # ax1.scatter(xr, 0, c="red")
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
+
+    def graficar():
+        xpts=np.arange(1,10,0.01)
+        formula = txt_formula.get()
+        x = symbols('x')
+        fn = sympify(formula)
+        f = lambdify(x, fn)
+
+        fig = Figure()
+        canvas = FigureCanvasTkAgg(fig, master=frame2)
+        canvas.draw()
+        ax=fig.add_subplot(111)
+        ax.plot(xpts, f(xpts))
+        ax.axhline(0, color="#6f6f6f")
+        ax.axvline(0, color="#6f6f6f")
+
+        toolbar = NavigationToolbar2Tk(canvas, frame2)
+        toolbar.update()
+
+        canvas.get_tk_widget().pack(side=customtkinter.TOP, fill=customtkinter.BOTH, expand=True)
 
     def limpiar():
         global trv
@@ -352,7 +291,7 @@ if __name__ == "__main__":
         "Roboto", 16), command=Metodos.accionesARealizar, border_width=2)
     btn_calcular.place(x=80, y=160)
     btn_graficar = customtkinter.CTkButton(master=frame, text="Graficar", width=150, height=40, font=(
-        "Roboto", 16), command=Metodos.represent, border_width=2)
+        "Roboto", 16), command=Metodos.graficar, border_width=2)
     btn_graficar.place(x=80, y=220)
     btn_limpiar = customtkinter.CTkButton(master=frame, text="Nuevo", width=150, height=40, font=(
         "Roboto", 16), command=Metodos.limpiar, border_width=2)
@@ -362,10 +301,6 @@ if __name__ == "__main__":
     cmb_modo = customtkinter.CTkOptionMenu(master=frame, values=[
                                            "System", "Dark", "Light", ], width=220, command=Metodos.change_appearance_mode_event)
     cmb_modo.place(x=1000, y=20)
-
-    # Grafica
-    cvs = FigureCanvasTkAgg(fig, frame2)
-    tlb = NavigationToolbar2Tk(cvs, frame2)
 
     # Inicialización de la Clase
     Metodos = Metodos(root)
