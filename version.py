@@ -54,6 +54,7 @@ class Metodos:
         self.wind.iconbitmap("Recursos/GraphMeth2.0.ico")
 
     def métodoDeBisección(event):
+        global lbl_resultado
         txt1 = txt_formula.get()
         txt2 = txt_intervaloA.get()
         txt3 = txt_intervaloB.get()
@@ -68,11 +69,11 @@ class Metodos:
             crit = 0.0000001
             i = 0
             ea = 1
-            x_anterior = 0
+            xr_anterior = 0
 
             while ea > crit:
                 xr = (a+b)/2
-                ea = abs((xr-x_anterior)/xr)
+                ea = abs((xr-xr_anterior)/xr)
                 if f(a) * f(b) >= 0:
                     messagebox.showinfo("Error", "¡Error! Fuera de Rango")
                     break
@@ -80,10 +81,13 @@ class Metodos:
                     b = xr
                 else:
                     a = xr
-                x_anterior = xr
-                trv.insert("", END, values=(i, a, b, x_anterior, (ea*100)))
+                xr_anterior = xr
+                trv.insert("", END, values=(i, a, b, xr_anterior, (ea*100)))
                 i = i + 1
             plt.scatter(xr, 0, c="red")
+            #plt.annotate(xr_anterior, xy=(xr_anterior, 3.5))
+            lbl_resultado = customtkinter.CTkLabel(master=frame, text=("Raíz encontrada en: ", xr_anterior) , font=("Roboto", 12))
+            lbl_resultado.place(x=220, y=640) 
 
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
@@ -124,7 +128,10 @@ class Metodos:
                 else:
                     messagebox.showinfo("Error", "Error")
                 trv.insert("", END, values=(i, a, b, xr_anterior, ea))
-            plt.scatter(xr, 0, c="red")
+            plt.scatter(xr_anterior, 0, c="red")
+            #plt.annotate(xr_anterior, xy=(xr_anterior, 3.5))
+            lbl_resultado = customtkinter.CTkLabel(master=frame, text=("Raíz encontrada en: ", xr_anterior) , font=("Roboto", 12))
+            lbl_resultado.place(x=220, y=640)  
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
@@ -151,6 +158,8 @@ class Metodos:
         plt.axhline(color="#6f6f6f")
         plt.axvline(color="#6f6f6f")
         plt.grid(True, which='both')
+        plt.xlabel("Abscisas")
+        plt.ylabel("Ordenadas")
         plt.ylim(lmin1, lmax1)
         
         canvas = FigureCanvasTkAgg(fig, master=frame2)
@@ -173,6 +182,7 @@ class Metodos:
         canvas.get_tk_widget().destroy()
         toolbar.destroy()
         canvas.draw()
+        lbl_resultado.destroy()
         
 
     def accionesARealizar():
@@ -222,7 +232,7 @@ if __name__ == "__main__":
     txt_intervaloB.place(x=450, y=320)
     textoAutores = customtkinter.CTkLabel(
         master=frame, text="Desarrollado por: Gorotiza - García - Masache", font=("Roboto", 16))
-    textoAutores.place(x=155, y=660)
+    textoAutores.place(x=155, y=670)
 
     # Imagenes
     img1 = customtkinter.CTkImage(light_image=Image.open("Recursos/calculadora1.png"),
@@ -255,7 +265,7 @@ if __name__ == "__main__":
     lbl_img4.place(x=600, y=210)
     lbl_img5 = customtkinter.CTkLabel(frame, image=img5, text="")
     lbl_img5.place(x=960, y=19)
-    Hovertip(lbl_img4, text="¿Qué valor ingresar?\nLim X\nRepresentará el eje de las abscisas.\nPor ejemplo: -20,20", hover_delay=500)
+    Hovertip(lbl_img4, text="¿Qué valor ingresar?\nLim X\nRepresentará el eje de las abscisas.\nPor ejemplo: -20,20\n\nLim Y\nRepresentará el eje de las ordenadas.\nPor ejemplo: -20,20", hover_delay=500)
 
     lbl_titulo = customtkinter.CTkLabel(
         master=frame, text="Métodos Numéricos", font=("Roboto", 25))
