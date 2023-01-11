@@ -73,8 +73,10 @@ class Metodos:
             while ea > crit:
                 xr = (a+b)/2
                 ea = abs((xr-x_anterior)/xr)
-
-                if (f(xr) * f(a)) < 0:
+                if f(a) * f(b) >= 0:
+                    messagebox.showinfo("Error", "¡Error! Fuera de Rango")
+                    break
+                elif (f(xr) * f(a)) < 0:
                     b = xr
                 else:
                     a = xr
@@ -109,8 +111,8 @@ class Metodos:
             while ea > crit:
                 xr_anterior = (a*f(b) - b*f(a)) / (f(b) - f(a))
                 if f(a) * f(b) >= 0:
-                    messagebox.showinfo("Error", "Error")
-                    quit()
+                    messagebox.showinfo("Error", "¡Error! Fuera de Rango")
+                    break
                 elif f(xr_anterior) * f(a) < 0:
                     ea = abs(xr_anterior - b)
                     b = xr_anterior
