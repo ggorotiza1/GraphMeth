@@ -162,7 +162,6 @@ class Metodos:
                 trv.insert("", END, values=(i, a, b, x_anterior, (ea*100)))
                 i = i + 1
             ax1.scatter(xr, 0, c="red")
-
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 

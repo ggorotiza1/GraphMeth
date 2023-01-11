@@ -80,7 +80,7 @@ class Metodos:
                 x_anterior = xr
                 trv.insert("", END, values=(i, a, b, x_anterior, (ea*100)))
                 i = i + 1
-            # ax1.scatter(xr, 0, c="red")
+            ax.scatter(xr, 0, c="red")
 
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
@@ -121,37 +121,52 @@ class Metodos:
                 else:
                     messagebox.showinfo("Error", "Error")
                 trv.insert("", END, values=(i, a, b, xr_anterior, ea))
-            # ax1.scatter(xr, 0, c="red")
+            ax.scatter(xr, 0, c="red")
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
     def graficar():
-        xpts=np.arange(1,10,0.01)
+        global ax
+        global canvas
+        global toolbar
+        rann = txt_rango.get()
+        ran = rann.split(",")
+        lmin = float(ran[0])
+        lmax = float(ran[1])
+        xpts = np.arange(lmin, lmax, 0.1)
         formula = txt_formula.get()
         x = symbols('x')
         fn = sympify(formula)
         f = lambdify(x, fn)
 
-        fig = Figure()
+        fig = Figure(figsize=(6, 5), dpi=100)
+
         canvas = FigureCanvasTkAgg(fig, master=frame2)
-        canvas.draw()
-        ax=fig.add_subplot(111)
-        ax.plot(xpts, f(xpts))
+        ax = fig.add_subplot(111)
+        ax.plot(xpts, f(xpts), label=fn, color="#006666")
         ax.axhline(0, color="#6f6f6f")
         ax.axvline(0, color="#6f6f6f")
+        ax.grid(True, which='both')
+        ax.legend(loc='upper right')
+        
+        canvas.draw()
 
         toolbar = NavigationToolbar2Tk(canvas, frame2)
         toolbar.update()
 
-        canvas.get_tk_widget().pack(side=customtkinter.TOP, fill=customtkinter.BOTH, expand=True)
+        canvas.get_tk_widget().pack(side=customtkinter.TOP,
+                                    fill=customtkinter.BOTH, expand=True)
 
     def limpiar():
-        global trv
-        global cvs
         txt_formula.delete(0, END)
         txt_intervaloA.delete(0, END)
         txt_intervaloB.delete(0, END)
         trv.delete(*trv.get_children())
+        ax.clear()
+        canvas.get_tk_widget().destroy()
+        toolbar.destroy()
+        canvas.draw()
+        
 
     def accionesARealizar():
         if cmb_metodos.get() == "":
