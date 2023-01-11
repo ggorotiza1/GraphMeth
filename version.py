@@ -183,8 +183,6 @@ class Metodos:
         elif cmb_metodos.get() == "Método de Falsa Posición":
             # messagebox.showinfo("Hola", "Método de Falsa Posición")
             Metodos.métodoDeFalsaPosicion()
-        elif cmb_metodos.get() == "Método de Newton-Raphson":
-            Metodos.métodoDeNewtonRaphson()
 
     def change_appearance_mode_event(new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
