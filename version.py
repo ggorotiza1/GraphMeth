@@ -159,8 +159,8 @@ class Metodos:
         plt.axhline(color="#6f6f6f")
         plt.axvline(color="#6f6f6f")
         plt.grid(True, which='both')
-        plt.xlabel("Abscisas")
-        plt.ylabel("Ordenadas")
+        plt.xlabel("Abscisas", color="#318DC8")
+        plt.ylabel("Ordenadas",color="#318DC8")
         plt.ylim(lmin1, lmax1)
         
         canvas = FigureCanvasTkAgg(fig, master=frame2)
