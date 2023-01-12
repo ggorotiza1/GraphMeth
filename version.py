@@ -154,7 +154,8 @@ class Metodos:
         f = lambdify(x, fn, "numpy")
 
         fig = plt.figure()
-        plt.plot(xpts, f(xpts))
+        plt.plot(xpts, f(xpts), label=fn)
+        plt.legend(loc='upper right')
         plt.axhline(color="#6f6f6f")
         plt.axvline(color="#6f6f6f")
         plt.grid(True, which='both')
