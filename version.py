@@ -23,7 +23,7 @@ import customtkinter
 import matplotlib
 matplotlib.use("TkAgg")
 
-#Realizado por Gabriel Gorotiza, Gabriel García, Blade Masache
+# Realizado por Gabriel Gorotiza, Gabriel García, Blade Masache
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
@@ -31,7 +31,7 @@ fun = {"sin:": "np.sin", "cos": "np.cos", "tan": "nap.tan",
        "sqrt": "np.sqrt", "exp": "np.exp", "log": "np.log", "pi": "np.pi"}
 
 vocales = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
-           "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"}
+           "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "y", "z"}
 act_rango = False
 ul_ran = ""
 ran = ""
@@ -54,6 +54,7 @@ class Metodos:
         self.wind.iconbitmap("Recursos/GraphMeth2.0.ico")
 
     def métodoDeBisección(event):
+        global a, b
         global lbl_resultado
         txt1 = txt_formula.get()
         txt2 = txt_intervaloA.get()
@@ -63,32 +64,36 @@ class Metodos:
             x = symbols('x')
             fn = sympify(formula)
             f = lambdify(x, fn, "numpy")
-
-            a = float(txt_intervaloA.get())
-            b = float(txt_intervaloB.get())
             crit = 0.0000001
             i = 0
             ea = 1
             xr_anterior = 0
-
-            while ea > crit:
-                xr = (a+b)/2
-                ea = abs((xr-xr_anterior)/xr)
+            try:
+                a = float(txt_intervaloA.get())
+                b = float(txt_intervaloB.get())
                 if f(a) * f(b) >= 0:
                     messagebox.showinfo("Error", "¡Error! Fuera de Rango")
-                    break
-                elif (f(xr) * f(a)) < 0:
-                    b = xr
                 else:
-                    a = xr
-                xr_anterior = xr
-                trv.insert("", END, values=(i, a, b, xr_anterior, (ea*100)))
-                i = i + 1
-            plt.scatter(xr, 0, c="red")
-            #plt.annotate(xr_anterior, xy=(xr_anterior, 3.5))
-            lbl_resultado = customtkinter.CTkLabel(master=frame, text=("Raíz encontrada en: ", xr_anterior) , font=("Roboto", 12))
-            lbl_resultado.place(x=220, y=640) 
+                    while ea > crit:
+                        xr = (a+b)/2
+                        ea = abs((xr-xr_anterior)/xr)
 
+                        if (f(xr) * f(a)) < 0:
+                            b = xr
+                        else:
+                            a = xr
+                        xr_anterior = xr
+                        trv.insert("", END, values=(
+                            i, a, b, xr_anterior, (ea*100)))
+                        i = i + 1
+                    plt.scatter(xr, 0, c="red")
+                    # plt.annotate(xr_anterior, xy=(xr_anterior, 3.5))
+                    lbl_resultado = customtkinter.CTkLabel(master=frame, text=(
+                        "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
+                    lbl_resultado.place(x=220, y=640)
+            except:
+                messagebox.showwarning(
+                    "Error de Formato", "Los intervalos [a, b] deben ser Números")
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
@@ -112,26 +117,31 @@ class Metodos:
 
             ea = abs(xr-xr_anterior)
 
-            while ea > crit:
-                xr_anterior = (a*f(b) - b*f(a)) / (f(b) - f(a))
+            try:
                 if f(a) * f(b) >= 0:
                     messagebox.showinfo("Error", "¡Error! Fuera de Rango")
-                    break
-                elif f(xr_anterior) * f(a) < 0:
-                    ea = abs(xr_anterior - b)
-                    b = xr_anterior
-                    i = i+1
-                elif f(xr_anterior) * f(b) < 0:
-                    ea = abs(xr_anterior - a)
-                    a = xr_anterior
-                    i = i+1
                 else:
-                    messagebox.showinfo("Error", "Error")
-                trv.insert("", END, values=(i, a, b, xr_anterior, ea))
-            plt.scatter(xr_anterior, 0, c="red")
-            #plt.annotate(xr_anterior, xy=(xr_anterior, 3.5))
-            lbl_resultado = customtkinter.CTkLabel(master=frame, text=("Raíz encontrada en: ", xr_anterior) , font=("Roboto", 12))
-            lbl_resultado.place(x=220, y=640)  
+                    while ea > crit:
+                        xr_anterior = (a*f(b) - b*f(a)) / (f(b) - f(a))
+                        if f(xr_anterior) * f(a) < 0:
+                            ea = abs(xr_anterior - b)
+                            b = xr_anterior
+                            i = i+1
+                        elif f(xr_anterior) * f(b) < 0:
+                            ea = abs(xr_anterior - a)
+                            a = xr_anterior
+                            i = i+1
+                        else:
+                            messagebox.showinfo("Error", "Error")
+                        trv.insert("", END, values=(i, a, b, xr_anterior, ea))
+                    plt.scatter(xr_anterior, 0, c="red")
+                    # plt.annotate(xr_anterior, xy=(xr_anterior, 3.5))
+                    lbl_resultado = customtkinter.CTkLabel(master=frame, text=(
+                        "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
+                    lbl_resultado.place(x=220, y=640)
+            except:
+                messagebox.showwarning(
+                    "Error de Formato", "Los intervalos [a, b] deben ser Números")
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
@@ -160,12 +170,11 @@ class Metodos:
         plt.axvline(color="#6f6f6f")
         plt.grid(True, which='both')
         plt.xlabel("Abscisas", color="#318DC8")
-        plt.ylabel("Ordenadas",color="#318DC8")
+        plt.ylabel("Ordenadas", color="#318DC8")
         plt.ylim(lmin1, lmax1)
-        
+
         canvas = FigureCanvasTkAgg(fig, master=frame2)
 
-        
         canvas.draw()
         toolbar = NavigationToolbar2Tk(canvas, frame2)
         toolbar.update()
@@ -173,7 +182,6 @@ class Metodos:
         canvas.get_tk_widget().pack(side=customtkinter.TOP,
                                     fill=customtkinter.BOTH, expand=True)
 
-        
     def limpiar():
         txt_formula.delete(0, END)
         txt_intervaloA.delete(0, END)
@@ -184,7 +192,6 @@ class Metodos:
         toolbar.destroy()
         canvas.draw()
         lbl_resultado.destroy()
-        
 
     def accionesARealizar():
         if cmb_metodos.get() == "":
