@@ -54,7 +54,6 @@ class Metodos:
         self.wind.iconbitmap("Recursos/GraphMeth2.0.ico")
 
     def métodoDeBisección(event):
-        global a, b
         global lbl_resultado
         txt1 = txt_formula.get()
         txt2 = txt_intervaloA.get()
@@ -68,27 +67,30 @@ class Metodos:
             i = 0
             ea = 1
             xr_anterior = 0
-            a = float(txt_intervaloA.get())
-            b = float(txt_intervaloB.get())
-            if f(a) * f(b) >= 0:
-                messagebox.showerror("Error", "¡Error! Fuera de Rango")
-            else:
-                while ea > crit:
-                    xr = (a+b)/2
-                    ea = abs((xr-xr_anterior)/xr)
-                    if (f(xr) * f(a)) < 0:
-                        b = xr
-                    else:
-                        a = xr
-                    xr_anterior = xr
-                    trv.insert("", END, values=(
-                        i, a, b, xr_anterior, (ea*100)))
-                    i = i + 1
-                plt.scatter(xr, 0, c="red")
-                # plt.annotate(xr_anterior, xy=(xr_anterior, 3.5))
-                lbl_resultado = customtkinter.CTkLabel(master=frame, text=(
-                    "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
-                lbl_resultado.place(x=220, y=640)
+            try:
+                a = float(txt_intervaloA.get())
+                b = float(txt_intervaloB.get())
+                if f(a) * f(b) >= 0:
+                    messagebox.showerror("Error", "¡Error! Fuera de Rango")
+                else:
+                    while ea > crit:
+                        xr = (a+b)/2
+                        ea = abs((xr-xr_anterior)/xr)
+                        if (f(xr) * f(a)) < 0:
+                            b = xr
+                        else:
+                            a = xr
+                        xr_anterior = xr
+                        trv.insert("", END, values=(
+                            i, a, b, xr_anterior, (ea*100)))
+                        i = i + 1
+                    plt.scatter(xr, 0, c="red")
+                    # plt.annotate(xr_anterior, xy=(xr_anterior, 3.5))
+                    lbl_resultado = customtkinter.CTkLabel(master=frame, text=(
+                        "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
+                    lbl_resultado.place(x=220, y=640)
+            except ValueError:
+                messagebox.showwarning("Atención", "Debe ingresar Números")
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
@@ -111,28 +113,32 @@ class Metodos:
             xr = (a*f(b) - b*f(a)) / (f(b) - f(a))
 
             ea = abs(xr-xr_anterior)
-
-            if f(a) * f(b) >= 0:
-                messagebox.showerror("Error", "¡Error! Fuera de Rango")
-            else:
-                while ea > crit:
-                    xr_anterior = (a*f(b) - b*f(a)) / (f(b) - f(a))
-                    if f(xr_anterior) * f(a) < 0:
-                        ea = abs(xr_anterior - b)
-                        b = xr_anterior
-                        i = i+1
-                    elif f(xr_anterior) * f(b) < 0:
-                        ea = abs(xr_anterior - a)
-                        a = xr_anterior
-                        i = i+1
-                    else:
-                        messagebox.showinfo("Error", "Error")
-                    trv.insert("", END, values=(i, a, b, xr_anterior, ea))
-                plt.scatter(xr_anterior, 0, c="red")
-                # plt.annotate(xr_anterior, xy=(xr_anterior, 3.5))
-                lbl_resultado = customtkinter.CTkLabel(master=frame, text=(
-                    "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
-                lbl_resultado.place(x=220, y=640)
+            try:
+                a = float(txt_intervaloA.get())
+                b = float(txt_intervaloB.get())
+                if f(a) * f(b) >= 0:
+                    messagebox.showerror("Error", "¡Error! Fuera de Rango")
+                else:
+                    while ea > crit:
+                        xr_anterior = (a*f(b) - b*f(a)) / (f(b) - f(a))
+                        if f(xr_anterior) * f(a) < 0:
+                            ea = abs(xr_anterior - b)
+                            b = xr_anterior
+                            i = i+1
+                        elif f(xr_anterior) * f(b) < 0:
+                            ea = abs(xr_anterior - a)
+                            a = xr_anterior
+                            i = i+1
+                        else:
+                            messagebox.showinfo("Error", "Error")
+                        trv.insert("", END, values=(i, a, b, xr_anterior, ea))
+                    plt.scatter(xr_anterior, 0, c="red")
+                    # plt.annotate(xr_anterior, xy=(xr_anterior, 3.5))
+                    lbl_resultado = customtkinter.CTkLabel(master=frame, text=(
+                        "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
+                    lbl_resultado.place(x=220, y=640)
+            except ValueError:
+                messagebox.showwarning("Atención", "Debe ingresar Números")
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
