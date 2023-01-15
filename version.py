@@ -207,7 +207,7 @@ class Metodos:
         customtkinter.set_appearance_mode(new_appearance_mode)
 
     def abrirManual():
-        path = "Recursos/manualUsuario.png"
+        path = "Recursos/manual.png"
         im = Image.open(path)
         im.show()
 
