@@ -90,7 +90,8 @@ class Metodos:
                         "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
                     lbl_resultado.place(x=220, y=640)
             except ValueError:
-                messagebox.showwarning("Atención", "Debe ingresar Números")
+                messagebox.showwarning(
+                    "Atención", "Los intervalos deben ser números")
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
@@ -138,7 +139,8 @@ class Metodos:
                         "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
                     lbl_resultado.place(x=220, y=640)
             except ValueError:
-                messagebox.showwarning("Atención", "Debe ingresar Números")
+                messagebox.showwarning(
+                    "Atención", "Los intervalos deben ser números")
         else:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
@@ -204,6 +206,11 @@ class Metodos:
     def change_appearance_mode_event(new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
 
+    def abrirManual():
+        path = "Recursos/manualUsuario.png"
+        im = Image.open(path)
+        im.show()
+
 
 if __name__ == "__main__":
     root = customtkinter.CTk()
@@ -258,18 +265,22 @@ if __name__ == "__main__":
     img5 = customtkinter.CTkImage(light_image=Image.open("Recursos/tema1.png"),
                                   dark_image=Image.open("Recursos/tema.png"),
                                   size=(24, 24))
+    img6 = customtkinter.CTkImage(light_image=Image.open("Recursos/logoimg1.png"),
+                                  dark_image=Image.open("Recursos/logoimg.png"),
+                                  size=(36, 36))
 
     # Labels Creados
-    lbl_img1 = customtkinter.CTkLabel(frame, image=img1, text="")
+    lbl_img1 = customtkinter.CTkLabel(master=frame, image=img1, text="")
     lbl_img1.place(x=30, y=163)
-    lbl_img2 = customtkinter.CTkLabel(frame, image=img2, text="")
+    lbl_img2 = customtkinter.CTkLabel(master=frame, image=img2, text="")
     lbl_img2.place(x=30, y=223)
-    lbl_img3 = customtkinter.CTkLabel(frame, image=img3, text="")
+    lbl_img3 = customtkinter.CTkLabel(master=frame, image=img3, text="")
     lbl_img3.place(x=30, y=283)
-    lbl_img4 = customtkinter.CTkLabel(frame, image=img4, text="")
+    lbl_img4 = customtkinter.CTkLabel(master=frame, image=img4, text="")
     lbl_img4.place(x=600, y=210)
-    lbl_img5 = customtkinter.CTkLabel(frame, image=img5, text="")
+    lbl_img5 = customtkinter.CTkLabel(master=frame, image=img5, text="")
     lbl_img5.place(x=960, y=19)
+
     Hovertip(lbl_img4, text="¿Qué valor ingresar?\nLim X\nRepresentará el eje de las abscisas.\nPor ejemplo: -20,20\n\nLim Y\nRepresentará el eje de las ordenadas.\nPor ejemplo: -20,20", hover_delay=500)
 
     lbl_titulo = customtkinter.CTkLabel(
@@ -327,7 +338,7 @@ if __name__ == "__main__":
     trv.heading("xr", text="Xr", anchor=CENTER)
     trv.heading("ea(%)", text="Ea(%)", anchor=CENTER)
     trv.place(x=20, y=410, width=600)
-
+    dfdf = customtkinter.CTk
     # Buttons Creados
     btn_calcular = customtkinter.CTkButton(master=frame, text="Calcular", width=150, height=40, font=(
         "Roboto", 16), command=Metodos.accionesARealizar, border_width=2)
@@ -338,6 +349,9 @@ if __name__ == "__main__":
     btn_limpiar = customtkinter.CTkButton(master=frame, text="Nuevo", width=150, height=40, font=(
         "Roboto", 16), command=Metodos.limpiar, border_width=2)
     btn_limpiar.place(x=80, y=280)
+    btn_usuario = customtkinter.CTkButton(
+        master=frame, image=img6, text="", command=Metodos.abrirManual, width=36, height=36)
+    btn_usuario.place(x=30, y=655)
 
     # ComboBox Creado
     cmb_modo = customtkinter.CTkOptionMenu(master=frame, values=[
