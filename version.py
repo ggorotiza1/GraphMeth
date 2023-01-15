@@ -265,8 +265,8 @@ if __name__ == "__main__":
     img5 = customtkinter.CTkImage(light_image=Image.open("Recursos/tema1.png"),
                                   dark_image=Image.open("Recursos/tema.png"),
                                   size=(24, 24))
-    img6 = customtkinter.CTkImage(light_image=Image.open("Recursos/logoimg1.png"),
-                                  dark_image=Image.open("Recursos/logoimg.png"),
+    img6 = customtkinter.CTkImage(light_image=Image.open("Recursos/help1.png"),
+                                  dark_image=Image.open("Recursos/help.png"),
                                   size=(36, 36))
 
     # Labels Creados
