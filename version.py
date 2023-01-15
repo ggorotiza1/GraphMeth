@@ -338,7 +338,7 @@ if __name__ == "__main__":
     trv.heading("xr", text="Xr", anchor=CENTER)
     trv.heading("ea(%)", text="Ea(%)", anchor=CENTER)
     trv.place(x=20, y=410, width=600)
-    dfdf = customtkinter.CTk
+
     # Buttons Creados
     btn_calcular = customtkinter.CTkButton(master=frame, text="Calcular", width=150, height=40, font=(
         "Roboto", 16), command=Metodos.accionesARealizar, border_width=2)
