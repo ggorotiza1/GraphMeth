@@ -207,7 +207,7 @@ class Metodos:
         customtkinter.set_appearance_mode(new_appearance_mode)
 
     def abrirManual():
-        path = "Recursos/manualUs.jpg"
+        path = "Recursos/manualUsuario2.jpg"
         im = Image.open(path)
         im.show()
 
@@ -311,11 +311,6 @@ if __name__ == "__main__":
         master=frame, text="Seleccione un Método:", font=("Roboto", 14))
     lbl_combo.place(x=10, y=60)
 
-    # Combobox
-    cmb_metodos = customtkinter.CTkComboBox(master=frame, values=[
-                                            "", "Método de Bisección", "Método de Falsa Posición"], width=220)
-    cmb_metodos.place(x=170, y=60)
-
     # Tabla Creada
     style = ttk.Style()
 
@@ -357,6 +352,11 @@ if __name__ == "__main__":
     cmb_modo = customtkinter.CTkOptionMenu(master=frame, values=[
                                            "System", "Dark", "Light", ], width=220, command=Metodos.change_appearance_mode_event)
     cmb_modo.place(x=1000, y=20)
+    
+    cmb_metodos = customtkinter.CTkComboBox(master=frame, values=[
+                                            "", "Método de Bisección", "Método de Falsa Posición"], width=220)
+    cmb_metodos.place(x=170, y=60)
+
 
     # Inicialización de la Clase
     Metodos = Metodos(root)
