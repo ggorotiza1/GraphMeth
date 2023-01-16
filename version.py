@@ -352,11 +352,10 @@ if __name__ == "__main__":
     cmb_modo = customtkinter.CTkOptionMenu(master=frame, values=[
                                            "System", "Dark", "Light", ], width=220, command=Metodos.change_appearance_mode_event)
     cmb_modo.place(x=1000, y=20)
-    
+
     cmb_metodos = customtkinter.CTkComboBox(master=frame, values=[
                                             "", "Método de Bisección", "Método de Falsa Posición"], width=220)
     cmb_metodos.place(x=170, y=60)
-
 
     # Inicialización de la Clase
     Metodos = Metodos(root)
