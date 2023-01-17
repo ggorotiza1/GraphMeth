@@ -49,7 +49,7 @@ class Metodos:
     def __init__(self, root):
         self.wind = root
         self.wind.title("GraphMeth - Métodos Cerrados - Cuarto 'A'")
-        self.wind.geometry("1280x720")
+        self.wind.geometry("1280x720+0+0")
         self.wind.resizable(0, 0)
         self.wind.iconbitmap("Recursos/GraphMeth2.0.ico")
 
