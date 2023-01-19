@@ -21,7 +21,6 @@ import os
 from sympy import Derivative, diff, simplify
 # from scipy.misc im
 
-
 class Metodos:
     def __init__(self, root):
         self.wind = root
@@ -69,7 +68,6 @@ class Metodos:
         x0 = float(entry2.get())
         crit = 0.0000001
         step = 1
-        flag = 1
         condition = True
         while condition:
             if fprima(x0) == 0.0:
