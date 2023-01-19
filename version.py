@@ -91,7 +91,6 @@ class Metodos:
                     lbl_resultado = customtkinter.CTkLabel(master=frame, text=(
                         "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
                     lbl_resultado.place(x=220, y=640)
-                    playsound('Sonidos/uChatScrollButton.wav')
             except ValueError:
                 messagebox.showwarning(
                     "Atención", "Los intervalos deben ser números")
@@ -141,7 +140,6 @@ class Metodos:
                     lbl_resultado = customtkinter.CTkLabel(master=frame, text=(
                         "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
                     lbl_resultado.place(x=220, y=640)
-                    playsound('Sonidos/uChatScrollButton.wav')
             except ValueError:
                 messagebox.showwarning(
                     "Atención", "Los intervalos deben ser números")
@@ -205,9 +203,11 @@ class Metodos:
         elif cmb_metodos.get() == "Método de Bisección":
             # messagebox.showinfo("Hola", "Método de Bisección")
             Metodos.métodoDeBisección()
+            playsound('Sonidos/uChatScrollButton.wav')
         elif cmb_metodos.get() == "Método de Falsa Posición":
             # messagebox.showinfo("Hola", "Método de Falsa Posición")
             Metodos.métodoDeFalsaPosicion()
+            playsound('Sonidos/uChatScrollButton.wav')
 
     def change_appearance_mode_event(new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
@@ -224,8 +224,8 @@ def click_boton(valor):
 
 def tecladoCalculadora():
     global bandera, frameCalc
-    playsound('Sonidos/uChatScrollButton.wav')
     if bandera == False:
+        playsound('Sonidos/uChatScrollButton.wav')
         frameCalc = Frame(root, width=260, height=130)
         frameCalc.place(x=295, y=220)
         btn_sen = customtkinter.CTkButton(
@@ -290,6 +290,7 @@ def tecladoCalculadora():
 
         bandera = True
     else:
+        playsound('Sonidos/uChatScrollButton.wav')
         frameCalc.destroy()
         bandera = False
 
