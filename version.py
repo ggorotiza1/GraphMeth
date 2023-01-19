@@ -147,7 +147,7 @@ class Metodos:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
     def graficar():
-        playsound('Sonidos/uChatScrollButton.wav')
+        reproducirSonido()
         global fig
         global canvas
         global toolbar
@@ -185,7 +185,7 @@ class Metodos:
                                     fill=customtkinter.BOTH, expand=True)
 
     def limpiar():
-        playsound('Sonidos/uChatScrollButton.wav')
+        reproducirSonido()
         txt_formula.delete(0, END)
         txt_intervaloA.delete(0, END)
         txt_intervaloB.delete(0, END)
@@ -203,30 +203,34 @@ class Metodos:
         elif cmb_metodos.get() == "Método de Bisección":
             # messagebox.showinfo("Hola", "Método de Bisección")
             Metodos.métodoDeBisección()
-            playsound('Sonidos/uChatScrollButton.wav')
+            reproducirSonido()
         elif cmb_metodos.get() == "Método de Falsa Posición":
             # messagebox.showinfo("Hola", "Método de Falsa Posición")
             Metodos.métodoDeFalsaPosicion()
-            playsound('Sonidos/uChatScrollButton.wav')
+            reproducirSonido()
 
     def change_appearance_mode_event(new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
 
     def abrirManual():
+        reproducirSonido()
         path = "Recursos/manualUsuario2.jpg"
         im = Image.open(path)
         im.show()
 
 def click_boton(valor):
-    playsound('Sonidos/uChatScrollButton.wav')
+    reproducirSonido()
     cont = len(txt_formula.get())
     txt_formula.insert(cont, valor)
+
+def reproducirSonido():
+    playsound('Sonidos/uChatScrollButton.wav')
 
 def tecladoCalculadora():
     global bandera, frameCalc
     if bandera == False:
-        playsound('Sonidos/uChatScrollButton.wav')
-        frameCalc = Frame(root, width=260, height=130)
+        reproducirSonido()
+        frameCalc = Frame(root, width=260, height=130, background="#cbc1a9")
         frameCalc.place(x=295, y=220)
         btn_sen = customtkinter.CTkButton(
             master=frameCalc, text="", width=24, height=24, image=img_sin, command=lambda: click_boton('sin'))
@@ -290,7 +294,7 @@ def tecladoCalculadora():
 
         bandera = True
     else:
-        playsound('Sonidos/uChatScrollButton.wav')
+        reproducirSonido()
         frameCalc.destroy()
         bandera = False
 
