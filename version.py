@@ -147,7 +147,7 @@ class Metodos:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
     def graficar():
-        reproducirSonido()
+        #reproducirSonido()
         global fig
         global canvas
         global toolbar
@@ -185,7 +185,7 @@ class Metodos:
                                     fill=customtkinter.BOTH, expand=True)
 
     def limpiar():
-        reproducirSonido()
+        #reproducirSonido()
         txt_formula.delete(0, END)
         txt_intervaloA.delete(0, END)
         txt_intervaloB.delete(0, END)
@@ -203,23 +203,23 @@ class Metodos:
         elif cmb_metodos.get() == "Método de Bisección":
             # messagebox.showinfo("Hola", "Método de Bisección")
             Metodos.métodoDeBisección()
-            reproducirSonido()
+            #reproducirSonido()
         elif cmb_metodos.get() == "Método de Falsa Posición":
             # messagebox.showinfo("Hola", "Método de Falsa Posición")
             Metodos.métodoDeFalsaPosicion()
-            reproducirSonido()
+            #reproducirSonido()
 
     def change_appearance_mode_event(new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
 
     def abrirManual():
-        reproducirSonido()
+        #reproducirSonido()
         path = "Recursos/manualUsuario2.jpg"
         im = Image.open(path)
         im.show()
 
 def click_boton(valor):
-    reproducirSonido()
+    #reproducirSonido()
     cont = len(txt_formula.get())
     txt_formula.insert(cont, valor)
 
@@ -229,7 +229,7 @@ def reproducirSonido():
 def tecladoCalculadora():
     global bandera, frameCalc
     if bandera == False:
-        reproducirSonido()
+        #reproducirSonido()
         frameCalc = Frame(root, width=260, height=130, background="#cbc1a9")
         frameCalc.place(x=295, y=220)
         btn_sen = customtkinter.CTkButton(
@@ -294,7 +294,7 @@ def tecladoCalculadora():
 
         bandera = True
     else:
-        reproducirSonido()
+        #reproducirSonido()
         frameCalc.destroy()
         bandera = False
 
@@ -392,11 +392,11 @@ if __name__ == "__main__":
 
     # Labels Creados
     lbl_img1 = customtkinter.CTkLabel(master=frame, image=img1, text="")
-    lbl_img1.place(x=30, y=163)
+    lbl_img1.place(x=30, y=283)
     lbl_img2 = customtkinter.CTkLabel(master=frame, image=img2, text="")
     lbl_img2.place(x=30, y=223)
     lbl_img3 = customtkinter.CTkLabel(master=frame, image=img3, text="")
-    lbl_img3.place(x=30, y=283)
+    lbl_img3.place(x=30, y=163)
     lbl_img4 = customtkinter.CTkLabel(master=frame, image=img4, text="")
     lbl_img4.place(x=600, y=210)
     lbl_img5 = customtkinter.CTkLabel(master=frame, image=img5, text="")
@@ -458,13 +458,13 @@ if __name__ == "__main__":
     # Buttons Creados
     btn_calcular = customtkinter.CTkButton(master=frame, text="Calcular", width=150, height=40, font=(
         "Roboto", 16), command=Metodos.accionesARealizar, border_width=2)
-    btn_calcular.place(x=80, y=160)
+    btn_calcular.place(x=80, y=280)
     btn_graficar = customtkinter.CTkButton(master=frame, text="Graficar", width=150, height=40, font=(
         "Roboto", 16), command=Metodos.graficar, border_width=2)
     btn_graficar.place(x=80, y=220)
     btn_limpiar = customtkinter.CTkButton(master=frame, text="Nuevo", width=150, height=40, font=(
         "Roboto", 16), command=Metodos.limpiar, border_width=2)
-    btn_limpiar.place(x=80, y=280)
+    btn_limpiar.place(x=80, y=160)
     btn_usuario = customtkinter.CTkButton(
         master=frame, image=img6, text="", command=Metodos.abrirManual, width=36, height=36)
     btn_usuario.place(x=30, y=655)
