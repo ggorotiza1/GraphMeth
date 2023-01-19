@@ -21,6 +21,7 @@ from PIL import Image
 import customtkinter
 # from scipy.misc import derivative
 import matplotlib
+from playsound import playsound
 matplotlib.use("TkAgg")
 
 # Realizado por Gabriel Gorotiza, Gabriel García, Blade Masache
@@ -90,6 +91,7 @@ class Metodos:
                     lbl_resultado = customtkinter.CTkLabel(master=frame, text=(
                         "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
                     lbl_resultado.place(x=220, y=640)
+                    playsound('Sonidos/uChatScrollButton.wav')
             except ValueError:
                 messagebox.showwarning(
                     "Atención", "Los intervalos deben ser números")
@@ -139,6 +141,7 @@ class Metodos:
                     lbl_resultado = customtkinter.CTkLabel(master=frame, text=(
                         "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
                     lbl_resultado.place(x=220, y=640)
+                    playsound('Sonidos/uChatScrollButton.wav')
             except ValueError:
                 messagebox.showwarning(
                     "Atención", "Los intervalos deben ser números")
@@ -146,6 +149,7 @@ class Metodos:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
     def graficar():
+        playsound('Sonidos/uChatScrollButton.wav')
         global fig
         global canvas
         global toolbar
@@ -183,6 +187,7 @@ class Metodos:
                                     fill=customtkinter.BOTH, expand=True)
 
     def limpiar():
+        playsound('Sonidos/uChatScrollButton.wav')
         txt_formula.delete(0, END)
         txt_intervaloA.delete(0, END)
         txt_intervaloB.delete(0, END)
@@ -212,14 +217,14 @@ class Metodos:
         im = Image.open(path)
         im.show()
 
-
 def click_boton(valor):
+    playsound('Sonidos/uChatScrollButton.wav')
     cont = len(txt_formula.get())
     txt_formula.insert(cont, valor)
 
-
 def tecladoCalculadora():
     global bandera, frameCalc
+    playsound('Sonidos/uChatScrollButton.wav')
     if bandera == False:
         frameCalc = Frame(root, width=260, height=130)
         frameCalc.place(x=295, y=220)
@@ -360,25 +365,25 @@ if __name__ == "__main__":
     img_log = customtkinter.CTkImage(light_image=Image.open("Recursos/log1.png"),
                                      dark_image=Image.open("Recursos/log.png"), size=(24, 24))
     img_raiz = customtkinter.CTkImage(light_image=Image.open("Recursos/raiz1.png"),
-                                     dark_image=Image.open("Recursos/raiz.png"), size=(24, 24))
+                                      dark_image=Image.open("Recursos/raiz.png"), size=(24, 24))
     img_exp = customtkinter.CTkImage(light_image=Image.open("Recursos/exp1.png"),
                                      dark_image=Image.open("Recursos/exp.png"), size=(24, 24))
     img_elevado = customtkinter.CTkImage(light_image=Image.open("Recursos/elevado1.png"),
-                                     dark_image=Image.open("Recursos/elevado.png"), size=(24, 24))
+                                         dark_image=Image.open("Recursos/elevado.png"), size=(24, 24))
     img_pi = customtkinter.CTkImage(light_image=Image.open("Recursos/pi1.png"),
-                                     dark_image=Image.open("Recursos/pi.png"), size=(24, 24))
+                                    dark_image=Image.open("Recursos/pi.png"), size=(24, 24))
     img_parentesis_izq = customtkinter.CTkImage(light_image=Image.open("Recursos/parentesis_izq1.png"),
-                                     dark_image=Image.open("Recursos/parentesis_izq.png"), size=(24, 24))
+                                                dark_image=Image.open("Recursos/parentesis_izq.png"), size=(24, 24))
     img_parentesis_der = customtkinter.CTkImage(light_image=Image.open("Recursos/parentesis_der1.png"),
-                                     dark_image=Image.open("Recursos/parentesis_der.png"), size=(24, 24))
+                                                dark_image=Image.open("Recursos/parentesis_der.png"), size=(24, 24))
     img_suma = customtkinter.CTkImage(light_image=Image.open("Recursos/suma1.png"),
-                                     dark_image=Image.open("Recursos/suma.png"), size=(24, 24))
+                                      dark_image=Image.open("Recursos/suma.png"), size=(24, 24))
     img_resta = customtkinter.CTkImage(light_image=Image.open("Recursos/resta1.png"),
-                                     dark_image=Image.open("Recursos/resta.png"), size=(24, 24))
-    img_multiplicacion= customtkinter.CTkImage(light_image=Image.open("Recursos/multiplicacion1.png"),
-                                     dark_image=Image.open("Recursos/multiplicacion.png"), size=(24, 24))
-    img_division= customtkinter.CTkImage(light_image=Image.open("Recursos/division1.png"),
-                                     dark_image=Image.open("Recursos/division.png"), size=(24, 24))
+                                       dark_image=Image.open("Recursos/resta.png"), size=(24, 24))
+    img_multiplicacion = customtkinter.CTkImage(light_image=Image.open("Recursos/multiplicacion1.png"),
+                                                dark_image=Image.open("Recursos/multiplicacion.png"), size=(24, 24))
+    img_division = customtkinter.CTkImage(light_image=Image.open("Recursos/division1.png"),
+                                          dark_image=Image.open("Recursos/division.png"), size=(24, 24))
 
     # Labels Creados
     lbl_img1 = customtkinter.CTkLabel(master=frame, image=img1, text="")
