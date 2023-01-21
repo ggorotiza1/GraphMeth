@@ -92,8 +92,8 @@ class Metodos:
                         i = i + 1
                     plt.scatter(xr, 0, c="red")
                     # plt.annotate(xr_anterior, xy=(xr_anterior, 3.5))
-                    lbl_resultado = customtkinter.CTkLabel(master=frame, text=(
-                        "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
+                    lbl_resultado = customtkinter.CTkLabel(master=frame, text=
+                        "Raíz encontrada en: " + str(xr_anterior), font=("Roboto", 12))
                     lbl_resultado.place(x=220, y=640)
                     
             except ValueError:
@@ -143,8 +143,8 @@ class Metodos:
                         trv.insert("", END, values=(i, a, b, xr_anterior, ea))
                     plt.scatter(xr_anterior, 0, c="red")
                     # plt.annotate(xr_anterior, xy=(xr_anterior, 3.5))
-                    lbl_resultado = customtkinter.CTkLabel(master=frame, text=(
-                        "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
+                    lbl_resultado = customtkinter.CTkLabel(master=frame, text=
+                        "Raíz encontrada en: " + str(xr_anterior), font=("Roboto", 12))
                     lbl_resultado.place(x=220, y=640)
             except ValueError:
                 messagebox.showwarning(
