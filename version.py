@@ -7,6 +7,7 @@ from matplotlib.figure import Figure
 from matplotlib import style
 import matplotlib.animation as anim
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.backends.backend_pdf import PdfPages
 import numpy as np
 from matplotlib import pyplot as plt
 import matplotlib.animation as animation
@@ -18,10 +19,13 @@ from idlelib.tooltip import Hovertip
 import sympy as sp
 import os
 from PIL import Image
+import io
 import customtkinter
 # from scipy.misc import derivative
 import matplotlib
 from playsound import playsound
+import pygame
+from fpdf import FPDF
 matplotlib.use("TkAgg")
 
 # Realizado por Gabriel Gorotiza, Gabriel García, Blade Masache
@@ -56,7 +60,7 @@ class Metodos:
         self.wind.iconbitmap("Recursos/GraphMeth2.0.ico")
 
     def métodoDeBisección(event):
-        global lbl_resultado
+        global lbl_resultado, i, a, b, xr_anterior, ea
         txt1 = txt_formula.get()
         txt2 = txt_intervaloA.get()
         txt3 = txt_intervaloB.get()
@@ -91,6 +95,7 @@ class Metodos:
                     lbl_resultado = customtkinter.CTkLabel(master=frame, text=(
                         "Raíz encontrada en: ", xr_anterior), font=("Roboto", 12))
                     lbl_resultado.place(x=220, y=640)
+                    
             except ValueError:
                 messagebox.showwarning(
                     "Atención", "Los intervalos deben ser números")
@@ -98,6 +103,7 @@ class Metodos:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
     def métodoDeFalsaPosicion(event):
+        global i, a, b, xr_anterior, ea
         txt1 = txt_formula.get()
         txt2 = txt_intervaloA.get()
         txt3 = txt_intervaloB.get()
@@ -147,10 +153,12 @@ class Metodos:
             messagebox.showinfo("Atención", "Debe llenar todos los campos")
 
     def graficar():
-        #reproducirSonido()
+        reproducirSonido()
+        #pdfFile = PdfPages("output.pdf")
         global fig
         global canvas
         global toolbar
+        global imagenPlot
         rann = txt_rango.get()
         ran = rann.split(",")
         lmin = float(ran[0])
@@ -174,6 +182,8 @@ class Metodos:
         plt.xlabel("Abscisas", color="#318DC8")
         plt.ylabel("Ordenadas", color="#318DC8")
         plt.ylim(lmin1, lmax1)
+        
+        #pdfFile.savefig(fig)
 
         canvas = FigureCanvasTkAgg(fig, master=frame2)
 
@@ -183,9 +193,11 @@ class Metodos:
 
         canvas.get_tk_widget().pack(side=customtkinter.TOP,
                                     fill=customtkinter.BOTH, expand=True)
+        #pdfFile.close()
+
 
     def limpiar():
-        #reproducirSonido()
+        reproducirSonido()
         txt_formula.delete(0, END)
         txt_intervaloA.delete(0, END)
         txt_intervaloB.delete(0, END)
@@ -203,61 +215,63 @@ class Metodos:
         elif cmb_metodos.get() == "Método de Bisección":
             # messagebox.showinfo("Hola", "Método de Bisección")
             Metodos.métodoDeBisección()
-            #reproducirSonido()
+            reproducirSonido()
         elif cmb_metodos.get() == "Método de Falsa Posición":
             # messagebox.showinfo("Hola", "Método de Falsa Posición")
             Metodos.métodoDeFalsaPosicion()
-            #reproducirSonido()
+            reproducirSonido()
 
     def change_appearance_mode_event(new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
 
     def abrirManual():
-        #reproducirSonido()
+        reproducirSonido()
         path = "Recursos/manualUsuario2.jpg"
         im = Image.open(path)
         im.show()
 
 def click_boton(valor):
-    #reproducirSonido()
+    reproducirSonido()
     cont = len(txt_formula.get())
     txt_formula.insert(cont, valor)
 
 def reproducirSonido():
-    playsound('Sonidos/uChatScrollButton.wav')
+    #playsound('Sonidos/uChatScrollButton.wav')
+    sonido_fondo = pygame.mixer.Sound("Sonidos/uChatScrollButton.wav")
+    pygame.mixer.Sound.play(sonido_fondo)
 
 def tecladoCalculadora():
     global bandera, frameCalc
     if bandera == False:
-        #reproducirSonido()
+        reproducirSonido()
         frameCalc = Frame(root, width=260, height=130, background="#cbc1a9")
         frameCalc.place(x=295, y=220)
         btn_sen = customtkinter.CTkButton(
-            master=frameCalc, text="", width=24, height=24, image=img_sin, command=lambda: click_boton('sin'))
+            master=frameCalc, text="", width=24, height=24, image=img_sin, command=lambda: click_boton('sin()'))
         btn_sen.place(x=10, y=10)
 
         btn_cos = customtkinter.CTkButton(
-            master=frameCalc, text="", width=24, height=24, image=img_cos, command=lambda: click_boton('cos'))
+            master=frameCalc, text="", width=24, height=24, image=img_cos, command=lambda: click_boton('cos()'))
         btn_cos.place(x=60, y=10)
 
         btn_tg = customtkinter.CTkButton(
-            master=frameCalc, text="", width=24, height=24, image=img_tg, command=lambda: click_boton('tan'))
+            master=frameCalc, text="", width=24, height=24, image=img_tg, command=lambda: click_boton('tan()'))
         btn_tg.place(x=110, y=10)
 
         btn_ln = customtkinter.CTkButton(
-            master=frameCalc, text="", width=24, height=24, image=img_ln, command=lambda: click_boton('ln'))
+            master=frameCalc, text="", width=24, height=24, image=img_ln, command=lambda: click_boton('ln()'))
         btn_ln.place(x=160, y=10)
 
         btn_log = customtkinter.CTkButton(
-            master=frameCalc, text="", width=24, height=24, image=img_log, command=lambda: click_boton('log'))
+            master=frameCalc, text="", width=24, height=24, image=img_log, command=lambda: click_boton('log()'))
         btn_log.place(x=210, y=10)
 
         btn_raiz = customtkinter.CTkButton(
-            master=frameCalc, text="", width=24, height=24, image=img_raiz, command=lambda: click_boton('sqrt'))
+            master=frameCalc, text="", width=24, height=24, image=img_raiz, command=lambda: click_boton('sqrt()'))
         btn_raiz.place(x=10, y=50)
 
         btn_exp = customtkinter.CTkButton(
-            master=frameCalc, text="", width=24, height=24, image=img_exp, command=lambda: click_boton('exp'))
+            master=frameCalc, text="", width=24, height=24, image=img_exp, command=lambda: click_boton('exp()'))
         btn_exp.place(x=60, y=50)
 
         btn_elevado = customtkinter.CTkButton(
@@ -294,14 +308,14 @@ def tecladoCalculadora():
 
         bandera = True
     else:
-        #reproducirSonido()
+        reproducirSonido()
         frameCalc.destroy()
         bandera = False
 
-
 if __name__ == "__main__":
     root = customtkinter.CTk()
-
+    pygame.init()
+    pygame.mixer.init()
     # Frames Creados
     frame = customtkinter.CTkFrame(
         master=root, width=1280, height=720)
@@ -471,6 +485,8 @@ if __name__ == "__main__":
     btn_calculadora = customtkinter.CTkButton(
         master=frame, text="", image=img7, width=24, height=24, command=tecladoCalculadora)
     btn_calculadora.place(x=540, y=167)
+    #btn_crearpdf = customtkinter.CTkButton(master=frame, text="PDF", command=crearPdf)
+    #btn_crearpdf.place(x=0,y=0)
     # ComboBox Creado
     cmb_modo = customtkinter.CTkOptionMenu(master=frame, values=[
                                            "System", "Dark", "Light", ], width=220, command=Metodos.change_appearance_mode_event)
