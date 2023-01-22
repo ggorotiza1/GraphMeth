@@ -154,7 +154,8 @@ class Metodos:
 
     def graficar():
         reproducirSonido()
-        #pdfFile = PdfPages("output.pdf")
+        formula = txt_formula.get()
+        #pdfFile = PdfPages("/Graficas/"+formula+".pdf")
         global fig
         global canvas
         global toolbar
