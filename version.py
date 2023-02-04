@@ -76,7 +76,7 @@ class Metodos:
             try:
                 a = float(txt_intervaloA.get())
                 b = float(txt_intervaloB.get())
-                if f(a) * f(b) >= 0:
+                if f(a) * f(b) >= 0: #Revisar el fuera de rango
                     messagebox.showerror("Error", "¡Error! Fuera de Rango")
                 else:
                     while ea > crit:
@@ -125,7 +125,7 @@ class Metodos:
             try:
                 a = float(txt_intervaloA.get())
                 b = float(txt_intervaloB.get())
-                if f(a) * f(b) >= 0:
+                if f(a) * f(b) >= 0: #Revisar el fuera de rango
                     messagebox.showerror("Error", "¡Error! Fuera de Rango")
                 else:
                     while ea > crit:
@@ -163,7 +163,7 @@ class Metodos:
         rann = txt_rango.get()
         ran = rann.split(",")
         lmin = float(ran[0])
-        lmax = float(ran[1])
+        lmax = float(ran[1])    
         rann1 = txt_rango1.get()
         ran1 = rann1.split(",")
         lmin1 = float(ran1[0])
@@ -195,7 +195,6 @@ class Metodos:
         canvas.get_tk_widget().pack(side=customtkinter.TOP,
                                     fill=customtkinter.BOTH, expand=True)
         #pdfFile.close()
-
 
     def limpiar():
         reproducirSonido()
