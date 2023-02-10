@@ -64,7 +64,7 @@ class Metodos:
         txt1 = txt_formula.get()
         txt2 = txt_intervaloA.get()
         txt3 = txt_intervaloB.get()
-        if txt1 != "" and txt2 != "" and txt3 != "":
+        if txt1 != None and txt2 != None and txt3 != None:
             formula = txt_formula.get()
             x = symbols('x')
             fn = sympify(formula)
@@ -108,7 +108,7 @@ class Metodos:
         txt2 = txt_intervaloA.get()
         txt3 = txt_intervaloB.get()
 
-        if txt1 != "" and txt2 != "" and txt3 != "":
+        if txt1 != None and txt2 != None and txt3 != None:
             formula = txt_formula.get()
             x = symbols('x')
             fn = sympify(formula)
