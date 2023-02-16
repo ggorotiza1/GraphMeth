@@ -15,6 +15,7 @@ from matplotlib import pyplot
 
 def métodoDeBisección(formula: Entry, txt2: Entry, txt3: Entry, trv: ttk.Treeview, plt: pyplot, frame: Frame):
     global lbl_resultado
+    global xr
     if formula.get() != None and txt2.get() != None and txt3.get() != None:
         formula = formula.get()
         x = symbols('x')

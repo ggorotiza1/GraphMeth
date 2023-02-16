@@ -15,7 +15,9 @@ from gGraphic import eliminarGrafica as eGrafico
 from mCalculation import métodoDeFalsaPosicion as mFP
 from mCalculation import métodoDeBisección as mB
 from mCalculation import eliminarLabel as eL
-from kFrame import teclado as keyboard
+from kFrame import createTeclado as cKeyboard
+from kFrame import deleteTeclado as dKeyboard
+from tButton import ToggleButton as toggle
 matplotlib.use("TkAgg")
 
 # Realizado por Gabriel Gorotiza, Gabriel García, Blade Masache
@@ -26,6 +28,8 @@ act_rango = False
 ul_ran = ""
 ran = ""
 plt.style.use('bmh')
+
+bandera = False
 
 
 class Metodos:
@@ -44,6 +48,7 @@ class Metodos:
             # messagebox.showinfo("Hola", "Método de Bisección")
             mB(txt_formula, txt_intervaloA, txt_intervaloB, trv, plt, frame)
             reproducirSonido()
+
         elif cmb_metodos.get() == "Método de Falsa Posición":
             # messagebox.showinfo("Hola", "Método de Falsa Posición")
             mFP(txt_formula, txt_intervaloA, txt_intervaloB, trv, plt, frame)
@@ -77,7 +82,6 @@ def graficar():
     else:
         grafico(txt_formula, txt_rango, txt_rango1, frame2)
 
-
 def limpiar():
     reproducirSonido()
     txt_formula.delete(0, END)
@@ -86,12 +90,6 @@ def limpiar():
     trv.delete(*trv.get_children())
     eGrafico()
     eL()
-
-
-def tecladoCalculadora():
-    reproducirSonido()
-    keyboard(root, click_boton, img_sin, img_cos, img_tg, img_ln, img_log, img_raiz, img_exp, img_elevado,
-             img_pi, img_parentesis_izq, img_parentesis_der, img_suma, img_resta, img_multiplicacion, img_division)
 
 
 if __name__ == "__main__":
@@ -264,9 +262,13 @@ if __name__ == "__main__":
     btn_usuario = customtkinter.CTkButton(
         master=frame, image=img6, text="", command=Metodos.abrirManual, width=36, height=36)
     btn_usuario.place(x=30, y=655)
-    btn_calculadora = customtkinter.CTkButton(
-        master=frame, text="", image=img7, width=24, height=24, command=tecladoCalculadora)
-    btn_calculadora.place(x=540, y=167)
+    #btn_calculadora = toggle(root, cKeyboard(root, click_boton, img_sin, img_cos, img_tg, img_ln, img_log, img_raiz, img_exp, img_elevado,
+      #            img_pi, img_parentesis_izq, img_parentesis_der, img_suma, img_resta, img_multiplicacion, img_division)
+     #   , dKeyboard)
+
+    #btn_calculadora = customtkinter.CTkButton(
+     #   master=frame, text="", image=img7, width=24, height=24, command=tecladoCalculadora)
+    #btn_calculadora.place(x=540, y=167)
 
     cmb_modo = customtkinter.CTkOptionMenu(master=frame, values=[
                                            "System", "Dark", "Light", ], width=220, command=Metodos.change_appearance_mode_event)
