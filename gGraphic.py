@@ -7,21 +7,20 @@ from sympy import symbols
 from sympy import lambdify
 from sympy import sympify
 import customtkinter
-
 # Realizado por Gabriel Gorotiza, Gabriel García, Blade Masache
 
 
-def graficar(formula: Entry, rann: Entry, rann1: Entry, frame2: Frame):
+def graficar(formula: Entry, rangoAbcisasG: Entry, rangoOrdenadasG: Entry, frame: Frame):
     global fig, canvas, toolbar
     if formula.get() == "":
         pass
     else:
-        ran = rann.get().split(",")
-        lmin = float(ran[0])
-        lmax = float(ran[1])
-        ran1 = rann1.get().split(",")
-        lmin1 = float(ran1[0])
-        lmax1 = float(ran1[1])
+        rangoAbcisas = rangoAbcisasG.get().split(",")
+        lmin = float(rangoAbcisas[0])
+        lmax = float(rangoAbcisas[1])
+        rangoOrdenadas= rangoOrdenadasG.get().split(",")
+        lmin1 = float(rangoOrdenadas[0])
+        lmax1 = float(rangoOrdenadas[1])
         xpts = np.arange(lmin, lmax, 0.1)
         x = symbols('x')
         fn = sympify(formula.get())
@@ -37,10 +36,10 @@ def graficar(formula: Entry, rann: Entry, rann1: Entry, frame2: Frame):
         plt.ylabel("Ordenadas", color="#318DC8")
         plt.ylim(lmin1, lmax1)
 
-        canvas = FigureCanvasTkAgg(fig, master=frame2)
+        canvas = FigureCanvasTkAgg(fig, master=frame)
 
         canvas.draw()
-        toolbar = NavigationToolbar2Tk(canvas, frame2)
+        toolbar = NavigationToolbar2Tk(canvas, frame)
         toolbar.update()
 
         canvas.get_tk_widget().pack(side=customtkinter.TOP,

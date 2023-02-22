@@ -28,9 +28,7 @@ act_rango = False
 ul_ran = ""
 ran = ""
 plt.style.use('bmh')
-
-bandera = False
-
+bandera=False
 
 class Metodos:
     def __init__(self, root):
@@ -74,11 +72,10 @@ def reproducirSonido():
     sonido_fondo = pygame.mixer.Sound("Sonidos/uChatScrollButton.wav")
     pygame.mixer.Sound.play(sonido_fondo)
 
-
 def graficar():
     reproducirSonido()
     if txt_formula.get() == "":
-        messagebox.showerror("No hay formula")
+        messagebox.showerror("Error", "No hay formula")
     else:
         grafico(txt_formula, txt_rango, txt_rango1, frame2)
 
@@ -91,6 +88,15 @@ def limpiar():
     eGrafico()
     eL()
 
+def teclado():
+    global bandera
+    if bandera==False:
+        cKeyboard(root, click_boton, img_sin, img_cos, img_tg, img_ln, img_log, img_raiz, img_exp, img_elevado,
+                                             img_pi, img_parentesis_izq, img_parentesis_der, img_suma, img_resta, img_multiplicacion, img_division)
+        bandera = True
+    else:
+        dKeyboard()
+        bandera = False
 
 if __name__ == "__main__":
     root = customtkinter.CTk()
@@ -262,13 +268,10 @@ if __name__ == "__main__":
     btn_usuario = customtkinter.CTkButton(
         master=frame, image=img6, text="", command=Metodos.abrirManual, width=36, height=36)
     btn_usuario.place(x=30, y=655)
-    #btn_calculadora = toggle(root, cKeyboard(root, click_boton, img_sin, img_cos, img_tg, img_ln, img_log, img_raiz, img_exp, img_elevado,
-      #            img_pi, img_parentesis_izq, img_parentesis_der, img_suma, img_resta, img_multiplicacion, img_division)
-     #   , dKeyboard)
-
-    #btn_calculadora = customtkinter.CTkButton(
-     #   master=frame, text="", image=img7, width=24, height=24, command=tecladoCalculadora)
-    #btn_calculadora.place(x=540, y=167)
+    #btn_calculadora = toggle(root,  dKeyboard)
+    btn_calculadora = customtkinter.CTkButton(
+        master=frame, text="", image=img7, width=24, height=24, command=teclado)
+    btn_calculadora.place(x=540, y=167)
 
     cmb_modo = customtkinter.CTkOptionMenu(master=frame, values=[
                                            "System", "Dark", "Light", ], width=220, command=Metodos.change_appearance_mode_event)

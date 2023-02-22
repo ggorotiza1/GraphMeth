@@ -13,10 +13,8 @@ class ToggleButton(ctk.CTkButton):
     def toggle(self):
         self.state = not self.state
         if self.state:
-            pass
-            #self.configure(command=self.command_off)
-            #self.state = False
+            self.configure(command=self.command_on)
+            self.state = False
         else:
-            #self.configure(command=self.command_on)
-            #self.state = True
-            pass
+            self.configure(command=self.command_off)
+            self.state = True
