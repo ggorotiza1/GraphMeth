@@ -18,6 +18,8 @@ from mCalculation import eliminarLabel as eL
 from kFrame import createTeclado as cKeyboard
 from kFrame import deleteTeclado as dKeyboard
 from tButton import ToggleButton as toggle
+import webbrowser
+
 matplotlib.use("TkAgg")
 
 # Realizado por Gabriel Gorotiza, Gabriel García, Blade Masache
@@ -57,9 +59,15 @@ class Metodos:
 
     def abrirManual():
         reproducirSonido()
-        path = "Recursos/manualUsuario2.jpg"
-        im = Image.open(path)
-        im.show()
+        path = 'https://drive.google.com/file/d/173yvF9CMz0WXC5OGpmexOUrphuM_XC_5/view?usp=sharing'
+        webbrowser.open_new(path)
+
+        #archivo = open('Recursos/manual2.pdf', 'r')
+        #archivo.read()
+
+        #path = "Recursos/manualUsuario2.jpg"
+        #im = Image.open(path)
+        #im.show()
 
 
 def click_boton(valor):

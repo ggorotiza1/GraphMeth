@@ -18,7 +18,7 @@ def graficar(formula: Entry, rangoAbcisasG: Entry, rangoOrdenadasG: Entry, frame
         rangoAbcisas = rangoAbcisasG.get().split(",")
         lmin = float(rangoAbcisas[0])
         lmax = float(rangoAbcisas[1])
-        rangoOrdenadas= rangoOrdenadasG.get().split(",")
+        rangoOrdenadas = rangoOrdenadasG.get().split(",")
         lmin1 = float(rangoOrdenadas[0])
         lmax1 = float(rangoOrdenadas[1])
         xpts = np.arange(lmin, lmax, 0.1)
