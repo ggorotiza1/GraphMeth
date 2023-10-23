@@ -3,7 +3,7 @@ import customtkinter as ctk
 
 class ToggleButton(ctk.CTkButton):
     def __init__(self, parent, command_on, command_off, **kwargs):
-        # Inicializamos el botón
+
         super().__init__(parent, **kwargs)
         self.command_on = command_on
         self.command_off = command_off

@@ -10,7 +10,7 @@ from tkinter import *
 from tkinter import ttk
 from matplotlib import pyplot
 
-# Realizado por Gabriel Gorotiza, Gabriel García, Blade Masache
+# Realizado por Gabriel Gorotiza
 
 
 def métodoDeBisección(formula: Entry, txt2: Entry, txt3: Entry, trv: ttk.Treeview, plt: pyplot, frame: Frame):

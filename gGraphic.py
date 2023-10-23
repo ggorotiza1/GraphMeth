@@ -7,7 +7,7 @@ from sympy import symbols
 from sympy import lambdify
 from sympy import sympify
 import customtkinter
-# Realizado por Gabriel Gorotiza, Gabriel García, Blade Masache
+# Realizado por Gabriel Gorotiza
 
 
 def graficar(formula: Entry, rangoAbcisasG: Entry, rangoOrdenadasG: Entry, frame: Frame):

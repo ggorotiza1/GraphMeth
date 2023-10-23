@@ -4,7 +4,7 @@ from idlelib.tooltip import Hovertip
 from PIL import Image
 import customtkinter
 
-# Realizado por Gabriel Gorotiza, Gabriel García, Blade Masache
+# Realizado por Gabriel Gorotiza
 
 def createTeclado(root: customtkinter.CTk, click_boton, img_sin: Image, img_cos: Image, img_tg: Image, img_ln: Image, img_log: Image, img_raiz: Image, img_exp: Image, img_elevado: Image, img_pi: Image, img_parentesis_izq: Image, img_parentesis_der: Image, img_suma: Image, img_resta: Image, img_multiplicacion: Image, img_division: Image):
     global frameCalc
