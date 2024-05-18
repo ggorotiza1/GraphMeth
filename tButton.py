@@ -1,6 +1,7 @@
 import tkinter as tk
 import customtkinter as ctk
 
+
 class ToggleButton(ctk.CTkButton):
     def __init__(self, parent, command_on, command_off, **kwargs):
 

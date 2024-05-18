@@ -29,7 +29,7 @@ customtkinter.set_default_color_theme("dark-blue")
 act_rango = False
 ul_ran = ""
 ran = ""
-plt.style.use('bmh')
+plt.style.use("bmh")
 bandera = False
 
 
@@ -43,8 +43,7 @@ class Metodos:
 
     def accionesARealizar():
         if cmb_metodos.get() == "":
-            messagebox.showinfo("Atención",
-                                "Seleccione un Método")
+            messagebox.showinfo("Atención", "Seleccione un Método")
         elif cmb_metodos.get() == "Método de Bisección":
             # messagebox.showinfo("Hola", "Método de Bisección")
             mB(txt_formula, txt_intervaloA, txt_intervaloB, trv, plt, frame)
@@ -60,7 +59,7 @@ class Metodos:
 
     def abrirManual():
         reproducirSonido()
-        path = 'https://drive.google.com/file/d/173yvF9CMz0WXC5OGpmexOUrphuM_XC_5/view?usp=sharing'
+        path = "https://drive.google.com/file/d/173yvF9CMz0WXC5OGpmexOUrphuM_XC_5/view?usp=sharing"
         webbrowser.open_new(path)
 
         # archivo = open('Recursos/manual2.pdf', 'r')
@@ -103,8 +102,25 @@ def limpiar():
 def teclado():
     global bandera
     if bandera == False:
-        cKeyboard(root, click_boton, img_sin, img_cos, img_tg, img_ln, img_log, img_raiz, img_exp, img_elevado,
-                  img_pi, img_parentesis_izq, img_parentesis_der, img_suma, img_resta, img_multiplicacion, img_division)
+        cKeyboard(
+            root,
+            click_boton,
+            img_sin,
+            img_cos,
+            img_tg,
+            img_ln,
+            img_log,
+            img_raiz,
+            img_exp,
+            img_elevado,
+            img_pi,
+            img_parentesis_izq,
+            img_parentesis_der,
+            img_suma,
+            img_resta,
+            img_multiplicacion,
+            img_division,
+        )
         bandera = True
     else:
         dKeyboard()
@@ -116,92 +132,170 @@ if __name__ == "__main__":
     pygame.init()
     pygame.mixer.init()
     # Frames Creados
-    frame = customtkinter.CTkFrame(
-        master=root, width=1280, height=720)
+    frame = customtkinter.CTkFrame(master=root, width=1280, height=720)
     frame.place(x=0, y=0)
 
     frame2 = customtkinter.CTkFrame(
-        master=root, width=640, height=720, bg_color="#ffffff")
+        master=root, width=640, height=720, bg_color="#ffffff"
+    )
     frame2.place(x=640, y=100)
     # Entry
-    txt_rango = customtkinter.CTkEntry(master=frame, font=(
-        "Roboto", 15), width=140, justify="center")
+    txt_rango = customtkinter.CTkEntry(
+        master=frame, font=("Roboto", 15), width=140, justify="center"
+    )
     txt_rango.place(x=280, y=240)
     txt_rango.insert(END, "-20,20")
-    txt_rango1 = customtkinter.CTkEntry(master=frame, font=(
-        "Roboto", 15), width=140, justify="center")
+    txt_rango1 = customtkinter.CTkEntry(
+        master=frame, font=("Roboto", 15), width=140, justify="center"
+    )
     txt_rango1.place(x=450, y=240)
     txt_rango1.insert(END, "-20,20")
-    txt_formula = customtkinter.CTkEntry(master=frame, font=(
-        "Roboto", 15), width=180, justify="center", placeholder_text="Ej: sin(x)", border_width=2)
+    txt_formula = customtkinter.CTkEntry(
+        master=frame,
+        font=("Roboto", 15),
+        width=180,
+        justify="center",
+        placeholder_text="Ej: sin(x)",
+        border_width=2,
+    )
     txt_formula.place(x=340, y=170)
-    txt_intervaloA = customtkinter.CTkEntry(master=frame, font=(
-        "Roboto", 15), width=140, justify="center", placeholder_text="Ej: -1 o 0", border_width=2)
+    txt_intervaloA = customtkinter.CTkEntry(
+        master=frame,
+        font=("Roboto", 15),
+        width=140,
+        justify="center",
+        placeholder_text="Ej: -1 o 0",
+        border_width=2,
+    )
     txt_intervaloA.place(x=280, y=320)
-    txt_intervaloB = customtkinter.CTkEntry(master=frame, font=(
-        "Roboto", 15), width=140, justify="center", placeholder_text="Ej: 0 o 1", border_width=2)
+    txt_intervaloB = customtkinter.CTkEntry(
+        master=frame,
+        font=("Roboto", 15),
+        width=140,
+        justify="center",
+        placeholder_text="Ej: 0 o 1",
+        border_width=2,
+    )
     txt_intervaloB.place(x=450, y=320)
     textoAutores = customtkinter.CTkLabel(
-        master=frame, text="Desarrollado por: Gorotiza - García - Masache", font=("Roboto", 16))
+        master=frame,
+        text="Desarrollado por: Gorotiza - García - Masache",
+        font=("Roboto", 16),
+    )
     textoAutores.place(x=155, y=670)
 
     # Imagenes
-    img1 = customtkinter.CTkImage(light_image=Image.open("Recursos/calculadora1.png"),
-                                  dark_image=Image.open(
-                                      "Recursos/calculadora.png"),
-                                  size=(36, 36))
-    img2 = customtkinter.CTkImage(light_image=Image.open("Recursos/grafica1.png"),
-                                  dark_image=Image.open(
-                                      "Recursos/grafica.png"),
-                                  size=(36, 36))
-    img3 = customtkinter.CTkImage(light_image=Image.open("Recursos/limpiar1.png"),
-                                  dark_image=Image.open(
-                                      "Recursos/limpiar.png"),
-                                  size=(36, 36))
-    img4 = customtkinter.CTkImage(light_image=Image.open("Recursos/info1.png"),
-                                  dark_image=Image.open("Recursos/info.png"),
-                                  size=(24, 24))
-    img5 = customtkinter.CTkImage(light_image=Image.open("Recursos/tema1.png"),
-                                  dark_image=Image.open("Recursos/tema.png"),
-                                  size=(24, 24))
-    img6 = customtkinter.CTkImage(light_image=Image.open("Recursos/help1.png"),
-                                  dark_image=Image.open("Recursos/help.png"),
-                                  size=(36, 36))
-    img7 = customtkinter.CTkImage(light_image=Image.open("Recursos/teclado1.png"),
-                                  dark_image=Image.open(
-                                      "Recursos/teclado.png"),
-                                  size=(24, 24))
+    img1 = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/calculadora1.png"),
+        dark_image=Image.open("Recursos/calculadora.png"),
+        size=(36, 36),
+    )
+    img2 = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/grafica1.png"),
+        dark_image=Image.open("Recursos/grafica.png"),
+        size=(36, 36),
+    )
+    img3 = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/limpiar1.png"),
+        dark_image=Image.open("Recursos/limpiar.png"),
+        size=(36, 36),
+    )
+    img4 = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/info1.png"),
+        dark_image=Image.open("Recursos/info.png"),
+        size=(24, 24),
+    )
+    img5 = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/tema1.png"),
+        dark_image=Image.open("Recursos/tema.png"),
+        size=(24, 24),
+    )
+    img6 = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/help1.png"),
+        dark_image=Image.open("Recursos/help.png"),
+        size=(36, 36),
+    )
+    img7 = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/teclado1.png"),
+        dark_image=Image.open("Recursos/teclado.png"),
+        size=(24, 24),
+    )
 
-    img_sin = customtkinter.CTkImage(light_image=Image.open("Recursos/sin1.png"),
-                                     dark_image=Image.open("Recursos/sin.png"), size=(24, 24))
-    img_cos = customtkinter.CTkImage(light_image=Image.open("Recursos/cos1.png"),
-                                     dark_image=Image.open("Recursos/cos.png"), size=(24, 24))
-    img_tg = customtkinter.CTkImage(light_image=Image.open("Recursos/tan1.png"),
-                                    dark_image=Image.open("Recursos/tan.png"), size=(24, 24))
-    img_ln = customtkinter.CTkImage(light_image=Image.open("Recursos/ln1.png"),
-                                    dark_image=Image.open("Recursos/ln.png"), size=(24, 24))
-    img_log = customtkinter.CTkImage(light_image=Image.open("Recursos/log1.png"),
-                                     dark_image=Image.open("Recursos/log.png"), size=(24, 24))
-    img_raiz = customtkinter.CTkImage(light_image=Image.open("Recursos/raiz1.png"),
-                                      dark_image=Image.open("Recursos/raiz.png"), size=(24, 24))
-    img_exp = customtkinter.CTkImage(light_image=Image.open("Recursos/exp1.png"),
-                                     dark_image=Image.open("Recursos/exp.png"), size=(24, 24))
-    img_elevado = customtkinter.CTkImage(light_image=Image.open("Recursos/elevado1.png"),
-                                         dark_image=Image.open("Recursos/elevado.png"), size=(24, 24))
-    img_pi = customtkinter.CTkImage(light_image=Image.open("Recursos/pi1.png"),
-                                    dark_image=Image.open("Recursos/pi.png"), size=(24, 24))
-    img_parentesis_izq = customtkinter.CTkImage(light_image=Image.open("Recursos/parentesis_izq1.png"),
-                                                dark_image=Image.open("Recursos/parentesis_izq.png"), size=(24, 24))
-    img_parentesis_der = customtkinter.CTkImage(light_image=Image.open("Recursos/parentesis_der1.png"),
-                                                dark_image=Image.open("Recursos/parentesis_der.png"), size=(24, 24))
-    img_suma = customtkinter.CTkImage(light_image=Image.open("Recursos/suma1.png"),
-                                      dark_image=Image.open("Recursos/suma.png"), size=(24, 24))
-    img_resta = customtkinter.CTkImage(light_image=Image.open("Recursos/resta1.png"),
-                                       dark_image=Image.open("Recursos/resta.png"), size=(24, 24))
-    img_multiplicacion = customtkinter.CTkImage(light_image=Image.open("Recursos/multiplicacion1.png"),
-                                                dark_image=Image.open("Recursos/multiplicacion.png"), size=(24, 24))
-    img_division = customtkinter.CTkImage(light_image=Image.open("Recursos/division1.png"),
-                                          dark_image=Image.open("Recursos/division.png"), size=(24, 24))
+    img_sin = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/sin1.png"),
+        dark_image=Image.open("Recursos/sin.png"),
+        size=(24, 24),
+    )
+    img_cos = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/cos1.png"),
+        dark_image=Image.open("Recursos/cos.png"),
+        size=(24, 24),
+    )
+    img_tg = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/tan1.png"),
+        dark_image=Image.open("Recursos/tan.png"),
+        size=(24, 24),
+    )
+    img_ln = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/ln1.png"),
+        dark_image=Image.open("Recursos/ln.png"),
+        size=(24, 24),
+    )
+    img_log = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/log1.png"),
+        dark_image=Image.open("Recursos/log.png"),
+        size=(24, 24),
+    )
+    img_raiz = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/raiz1.png"),
+        dark_image=Image.open("Recursos/raiz.png"),
+        size=(24, 24),
+    )
+    img_exp = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/exp1.png"),
+        dark_image=Image.open("Recursos/exp.png"),
+        size=(24, 24),
+    )
+    img_elevado = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/elevado1.png"),
+        dark_image=Image.open("Recursos/elevado.png"),
+        size=(24, 24),
+    )
+    img_pi = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/pi1.png"),
+        dark_image=Image.open("Recursos/pi.png"),
+        size=(24, 24),
+    )
+    img_parentesis_izq = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/parentesis_izq1.png"),
+        dark_image=Image.open("Recursos/parentesis_izq.png"),
+        size=(24, 24),
+    )
+    img_parentesis_der = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/parentesis_der1.png"),
+        dark_image=Image.open("Recursos/parentesis_der.png"),
+        size=(24, 24),
+    )
+    img_suma = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/suma1.png"),
+        dark_image=Image.open("Recursos/suma.png"),
+        size=(24, 24),
+    )
+    img_resta = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/resta1.png"),
+        dark_image=Image.open("Recursos/resta.png"),
+        size=(24, 24),
+    )
+    img_multiplicacion = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/multiplicacion1.png"),
+        dark_image=Image.open("Recursos/multiplicacion.png"),
+        size=(24, 24),
+    )
+    img_division = customtkinter.CTkImage(
+        light_image=Image.open("Recursos/division1.png"),
+        dark_image=Image.open("Recursos/division.png"),
+        size=(24, 24),
+    )
 
     # Labels Creados
     lbl_img1 = customtkinter.CTkLabel(master=frame, image=img1, text="")
@@ -215,43 +309,56 @@ if __name__ == "__main__":
     lbl_img5 = customtkinter.CTkLabel(master=frame, image=img5, text="")
     lbl_img5.place(x=960, y=19)
 
-    Hovertip(lbl_img4, text="¿Qué valor ingresar?\nLim X\nRepresentará el eje de las abscisas.\nPor ejemplo: -20,20\n\nLim Y\nRepresentará el eje de las ordenadas.\nPor ejemplo: -20,20", hover_delay=500)
+    Hovertip(
+        lbl_img4,
+        text="¿Qué valor ingresar?\nLim X\nRepresentará el eje de las abscisas.\nPor ejemplo: -20,20\n\nLim Y\nRepresentará el eje de las ordenadas.\nPor ejemplo: -20,20",
+        hover_delay=500,
+    )
 
     lbl_titulo = customtkinter.CTkLabel(
-        master=frame, text="Métodos Numéricos", font=("Roboto", 25))
+        master=frame, text="Métodos Numéricos", font=("Roboto", 25)
+    )
     lbl_titulo.place(x=530, y=15)
     lbl_formula = customtkinter.CTkLabel(
-        master=frame, text="Ingrese Fórmula", font=("Roboto", 20))
+        master=frame, text="Ingrese Fórmula", font=("Roboto", 20)
+    )
     lbl_formula.place(x=360, y=130)
     lbl_intervaloA = customtkinter.CTkLabel(
-        master=frame, text="Ingrese Intervalo [Xa]", font=("Roboto", 15))
+        master=frame, text="Ingrese Intervalo [Xa]", font=("Roboto", 15)
+    )
     lbl_intervaloA.place(x=280, y=280)
     lbl_intervaloB = customtkinter.CTkLabel(
-        master=frame, text="Ingrese Intervalo [Xb]", font=("Roboto", 15))
+        master=frame, text="Ingrese Intervalo [Xb]", font=("Roboto", 15)
+    )
     lbl_intervaloB.place(x=450, y=280)
     lbl_table = customtkinter.CTkLabel(
-        master=frame, text="Tabla de Resultados", font=("Roboto", 24))
+        master=frame, text="Tabla de Resultados", font=("Roboto", 24)
+    )
     lbl_table.place(x=230, y=370)
     lbl_grafica = customtkinter.CTkLabel(
-        master=frame2, text="Gráfica", font=("Roboto", 24))
+        master=frame2, text="Gráfica", font=("Roboto", 24)
+    )
     lbl_grafica.pack(pady=10)
-    lbl_rango = customtkinter.CTkLabel(
-        master=frame, text="Lim X", font=("Roboto", 20))
+    lbl_rango = customtkinter.CTkLabel(master=frame, text="Lim X", font=("Roboto", 20))
     lbl_rango.place(x=330, y=210)
-    lbl_rango1 = customtkinter.CTkLabel(
-        master=frame, text="Lim Y", font=("Roboto", 20))
+    lbl_rango1 = customtkinter.CTkLabel(master=frame, text="Lim Y", font=("Roboto", 20))
     lbl_rango1.place(x=490, y=210)
     lbl_combo = customtkinter.CTkLabel(
-        master=frame, text="Seleccione un Método:", font=("Roboto", 14))
+        master=frame, text="Seleccione un Método:", font=("Roboto", 14)
+    )
     lbl_combo.place(x=10, y=60)
 
     # Tabla Creada
     style = ttk.Style()
 
     # Estilos de Tabla 'clam', 'alt', 'default', 'classic'
-    style.theme_use('alt')
-    style.configure("Treeview.Heading", background="#424141",
-                    foreground="white", fieldbackground="black")
+    style.theme_use("alt")
+    style.configure(
+        "Treeview.Heading",
+        background="#424141",
+        foreground="white",
+        fieldbackground="black",
+    )
     trv = ttk.Treeview(frame, columns=("i", "xa", "xb", "xr", "ea(%)"))
     trv.column("#0", width=0, anchor=CENTER)
     trv.column("i", width=80, anchor=CENTER)
@@ -269,29 +376,68 @@ if __name__ == "__main__":
     trv.place(x=20, y=410, width=600)
 
     # Buttons Creados
-    btn_calcular = customtkinter.CTkButton(master=frame, text="Calcular", width=150, height=40, font=(
-        "Roboto", 16), command=Metodos.accionesARealizar, border_width=2)
+    btn_calcular = customtkinter.CTkButton(
+        master=frame,
+        text="Calcular",
+        width=150,
+        height=40,
+        font=("Roboto", 16),
+        command=Metodos.accionesARealizar,
+        border_width=2,
+    )
     btn_calcular.place(x=80, y=280)
-    btn_graficar = customtkinter.CTkButton(master=frame, text="Graficar", width=150, height=40, font=(
-        "Roboto", 16), command=graficar, border_width=2)
+    btn_graficar = customtkinter.CTkButton(
+        master=frame,
+        text="Graficar",
+        width=150,
+        height=40,
+        font=("Roboto", 16),
+        command=graficar,
+        border_width=2,
+    )
     btn_graficar.place(x=80, y=220)
-    btn_limpiar = customtkinter.CTkButton(master=frame, text="Nuevo", width=150, height=40, font=(
-        "Roboto", 16), command=limpiar, border_width=2)
+    btn_limpiar = customtkinter.CTkButton(
+        master=frame,
+        text="Nuevo",
+        width=150,
+        height=40,
+        font=("Roboto", 16),
+        command=limpiar,
+        border_width=2,
+    )
     btn_limpiar.place(x=80, y=160)
     btn_usuario = customtkinter.CTkButton(
-        master=frame, image=img6, text="", command=Metodos.abrirManual, width=36, height=36)
+        master=frame,
+        image=img6,
+        text="",
+        command=Metodos.abrirManual,
+        width=36,
+        height=36,
+    )
     btn_usuario.place(x=30, y=655)
     # btn_calculadora = toggle(root,  dKeyboard)
     btn_calculadora = customtkinter.CTkButton(
-        master=frame, text="", image=img7, width=24, height=24, command=teclado)
+        master=frame, text="", image=img7, width=24, height=24, command=teclado
+    )
     btn_calculadora.place(x=540, y=167)
 
-    cmb_modo = customtkinter.CTkOptionMenu(master=frame, values=[
-                                           "System", "Dark", "Light", ], width=220, command=Metodos.change_appearance_mode_event)
+    cmb_modo = customtkinter.CTkOptionMenu(
+        master=frame,
+        values=[
+            "System",
+            "Dark",
+            "Light",
+        ],
+        width=220,
+        command=Metodos.change_appearance_mode_event,
+    )
     cmb_modo.place(x=1000, y=20)
 
-    cmb_metodos = customtkinter.CTkComboBox(master=frame, values=[
-                                            "", "Método de Bisección", "Método de Falsa Posición"], width=220)
+    cmb_metodos = customtkinter.CTkComboBox(
+        master=frame,
+        values=["", "Método de Bisección", "Método de Falsa Posición"],
+        width=220,
+    )
     cmb_metodos.place(x=170, y=60)
 
     # Inicialización de la Clase
