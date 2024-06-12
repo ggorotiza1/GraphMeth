@@ -10,7 +10,6 @@ from tkinter import *
 from tkinter import ttk
 from matplotlib import pyplot
 
-# Realizado por Gabriel Gorotiza
 
 def métodoDeBisección(
     formula: Entry,
@@ -20,6 +19,20 @@ def métodoDeBisección(
     plt: pyplot,
     frame: Frame,
 ):
+    """
+    Implements the Bisection Method to find the root of a function within a given interval.
+
+    Args:
+        formula (Entry): The input field for the mathematical formula.
+        txt2 (Entry): The input field for the lower bound of the interval.
+        txt3 (Entry): The input field for the upper bound of the interval.
+        trv (ttk.Treeview): The Treeview widget to display the iteration results.
+        plt (pyplot): The pyplot object for plotting the graph.
+        frame (Frame): The frame to display the result label.
+
+    Returns:
+        None
+    """
     global lbl_resultado
     global xr
     if formula.get() != None and txt2.get() != None and txt3.get() != None:
@@ -34,7 +47,7 @@ def métodoDeBisección(
         try:
             a = float(txt2.get())
             b = float(txt3.get())
-            if f(a) * f(b) >= 0:  # Revisar el fuera de rango
+            if f(a) * f(b) >= 0:  
                 messagebox.showerror("Error", "¡Error! Fuera de Rango")
             else:
                 while ea > crit:
@@ -70,6 +83,20 @@ def métodoDeFalsaPosicion(
     plt: pyplot,
     frame: Frame,
 ):
+    """
+    Implements the method of false position to find the root of a function within a given interval.
+
+    Args:
+        formula (Entry): The input field for the mathematical formula.
+        txt2 (Entry): The input field for the lower bound of the interval.
+        txt3 (Entry): The input field for the upper bound of the interval.
+        trv (ttk.Treeview): The treeview widget to display the iteration results.
+        plt (pyplot): The pyplot object for plotting.
+        frame (Frame): The frame widget to display the result label.
+
+    Returns:
+        None
+    """
     global lbl_resultado
     if formula != None and txt2 != None and txt3 != None:
         formula = formula.get()
@@ -119,6 +146,9 @@ def métodoDeFalsaPosicion(
 
 
 def eliminarLabel():
+    """
+    This function checks if the label 'lbl_resultado' exists and destroys it if it does.
+    """
     if lbl_resultado.winfo_exists():
         lbl_resultado.destroy()
     else:

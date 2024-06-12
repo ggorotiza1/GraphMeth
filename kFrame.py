@@ -4,9 +4,6 @@ from idlelib.tooltip import Hovertip
 from PIL import Image
 import customtkinter
 
-# Realizado por Gabriel Gorotiza
-
-
 def createTeclado(
     root: customtkinter.CTk,
     click_boton,
@@ -26,6 +23,28 @@ def createTeclado(
     img_multiplicacion: Image,
     img_division: Image,
 ):
+    """
+    Creates a custom keyboard interface for a calculator.
+
+    Args:
+        root (customtkinter.CTk): The root window of the calculator.
+        click_boton (function): The function to be called when a button is clicked.
+        img_sin (Image): The image for the sin button.
+        img_cos (Image): The image for the cos button.
+        img_tg (Image): The image for the tg button.
+        img_ln (Image): The image for the ln button.
+        img_log (Image): The image for the log button.
+        img_raiz (Image): The image for the square root button.
+        img_exp (Image): The image for the exponential button.
+        img_elevado (Image): The image for the power button.
+        img_pi (Image): The image for the pi button.
+        img_parentesis_izq (Image): The image for the left parenthesis button.
+        img_parentesis_der (Image): The image for the right parenthesis button.
+        img_suma (Image): The image for the addition button.
+        img_resta (Image): The image for the subtraction button.
+        img_multiplicacion (Image): The image for the multiplication button.
+        img_division (Image): The image for the division button.
+    """
     global frameCalc
     frameCalc = Frame(root, width=260, height=130, background="#cbc1a9")
     frameCalc.place(x=295, y=220)
@@ -181,4 +200,7 @@ def createTeclado(
 
 
 def deleteTeclado():
+    """
+    Deletes the teclado frame.
+    """
     frameCalc.destroy()

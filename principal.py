@@ -22,8 +22,6 @@ import webbrowser
 
 matplotlib.use("TkAgg")
 
-# Realizado por Gabriel Gorotiza
-
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
 act_rango = False
@@ -34,7 +32,20 @@ bandera = False
 
 
 class Metodos:
+    """
+    A class that represents the methods for GraphMeth.
+
+    Attributes:
+        wind: The root window of the application.
+    """
+
     def __init__(self, root):
+        """
+        Initializes the Metodos class.
+
+        Args:
+            root: The root window of the application.
+        """
         self.wind = root
         self.wind.title("GraphMeth - Métodos Cerrados - Cuarto 'A'")
         self.wind.geometry("1280x720+0+0")
@@ -42,6 +53,12 @@ class Metodos:
         self.wind.iconbitmap("Recursos/GraphMeth2.0.ico")
 
     def accionesARealizar():
+        """
+        Performs the actions based on the selected method.
+
+        Raises:
+            messagebox.showinfo: If no method is selected.
+        """
         if cmb_metodos.get() == "":
             messagebox.showinfo("Atención", "Seleccione un Método")
         elif cmb_metodos.get() == "Método de Bisección":
@@ -55,9 +72,18 @@ class Metodos:
             reproducirSonido()
 
     def change_appearance_mode_event(new_appearance_mode: str):
+        """
+        Changes the appearance mode of the application.
+
+        Args:
+            new_appearance_mode: The new appearance mode to be set.
+        """
         customtkinter.set_appearance_mode(new_appearance_mode)
 
     def abrirManual():
+        """
+        Opens the user manual for GraphMeth.
+        """
         reproducirSonido()
         path = "https://drive.google.com/file/d/173yvF9CMz0WXC5OGpmexOUrphuM_XC_5/view?usp=sharing"
         webbrowser.open_new(path)
@@ -71,17 +97,41 @@ class Metodos:
 
 
 def click_boton(valor):
+    """
+    This function is called when a button is clicked.
+    
+    It plays a sound and inserts the given value into the text field.
+    
+    Parameters:
+    - valor: The value to be inserted into the text field.
+    """
     reproducirSonido()
     cont = len(txt_formula.get())
     txt_formula.insert(cont, valor)
 
 
 def reproducirSonido():
+    """
+    Reproduce un sonido de fondo utilizando el archivo "uChatScrollButton.wav".
+    """
     sonido_fondo = pygame.mixer.Sound("Sonidos/uChatScrollButton.wav")
     pygame.mixer.Sound.play(sonido_fondo)
 
 
 def graficar():
+    """
+    Function to plot a graph based on the provided formula and range.
+
+    This function first plays a sound, then checks if the formula input is empty.
+    If the formula is empty, it displays an error message.
+    Otherwise, it plots the graph using the formula, range, and a specified frame.
+
+    Parameters:
+    - None
+
+    Returns:
+    - None
+    """
     reproducirSonido()
     if txt_formula.get() == "":
         messagebox.showerror("Error", "No hay formula")
@@ -90,6 +140,9 @@ def graficar():
 
 
 def limpiar():
+    """
+    Clears the input fields, the treeview, and updates the graph.
+    """
     reproducirSonido()
     txt_formula.delete(0, END)
     txt_intervaloA.delete(0, END)
@@ -100,6 +153,19 @@ def limpiar():
 
 
 def teclado():
+    """
+    This function toggles the keyboard display on the GUI.
+
+    If the keyboard is currently hidden, it will be displayed by calling the cKeyboard function.
+    If the keyboard is currently displayed, it will be hidden by calling the dKeyboard function.
+    The global variable 'bandera' is used to keep track of the current state of the keyboard.
+
+    Parameters:
+    None
+
+    Returns:
+    None
+    """
     global bandera
     if bandera == False:
         cKeyboard(
@@ -131,7 +197,6 @@ if __name__ == "__main__":
     root = customtkinter.CTk()
     pygame.init()
     pygame.mixer.init()
-    # Frames Creados
     frame = customtkinter.CTkFrame(master=root, width=1280, height=720)
     frame.place(x=0, y=0)
 
@@ -139,7 +204,6 @@ if __name__ == "__main__":
         master=root, width=640, height=720, bg_color="#ffffff"
     )
     frame2.place(x=640, y=100)
-    # Entry
     txt_rango = customtkinter.CTkEntry(
         master=frame, font=("Roboto", 15), width=140, justify="center"
     )
@@ -184,7 +248,6 @@ if __name__ == "__main__":
     )
     textoAutores.place(x=155, y=670)
 
-    # Imagenes
     img1 = customtkinter.CTkImage(
         light_image=Image.open("Recursos/calculadora1.png"),
         dark_image=Image.open("Recursos/calculadora.png"),
@@ -297,7 +360,6 @@ if __name__ == "__main__":
         size=(24, 24),
     )
 
-    # Labels Creados
     lbl_img1 = customtkinter.CTkLabel(master=frame, image=img1, text="")
     lbl_img1.place(x=30, y=283)
     lbl_img2 = customtkinter.CTkLabel(master=frame, image=img2, text="")
@@ -348,10 +410,8 @@ if __name__ == "__main__":
     )
     lbl_combo.place(x=10, y=60)
 
-    # Tabla Creada
     style = ttk.Style()
 
-    # Estilos de Tabla 'clam', 'alt', 'default', 'classic'
     style.theme_use("alt")
     style.configure(
         "Treeview.Heading",
@@ -375,7 +435,6 @@ if __name__ == "__main__":
     trv.heading("ea(%)", text="Ea(%)", anchor=CENTER)
     trv.place(x=20, y=410, width=600)
 
-    # Buttons Creados
     btn_calcular = customtkinter.CTkButton(
         master=frame,
         text="Calcular",
@@ -440,7 +499,6 @@ if __name__ == "__main__":
     )
     cmb_metodos.place(x=170, y=60)
 
-    # Inicialización de la Clase
     Metodos = Metodos(root)
 
 root.mainloop()
